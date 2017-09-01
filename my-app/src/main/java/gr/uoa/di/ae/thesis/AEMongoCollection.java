@@ -11,6 +11,7 @@ import org.bson.Document;
 //import org.bson.codecs.configuration.CodecRegistry;
 //import org.bson.conversions.Bson;
 
+
 import com.mongodb.BasicDBObject;
 /*import com.mongodb.ReadConcern;
 import com.mongodb.ReadPreference;
@@ -59,7 +60,7 @@ public class AEMongoCollection {
 	public void setEncryptedField(String field,EncryptionType enc)
 	{
 		if(encrypted_fields.containsKey(field))
-			System.out.println("You have already defined an encryption type for the field "+field);
+			throw new IllegalStateException("You have already defined an encryption type for the field "+field);
 		else
 			encrypted_fields.put(field, enc);
 	}
