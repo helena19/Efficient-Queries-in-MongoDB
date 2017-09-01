@@ -23,22 +23,28 @@ public class AEMongoCollection {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void AEMongoCollectionCreateDoc(MongoCollection<Document> collection) {
-		Document doc = new Document();
+	public void AEMongoCollectionCreateDoc(MongoCollection<Document> collection) {	
 		Scanner keyboard = new Scanner(System.in);
-		System.out.println("Enter your name");
-		String name = keyboard.next();
-		doc.append("name", name);
-		System.out.println("Enter your surname");
-		String surname = keyboard.next();
-		doc.append("surname", surname);
-		System.out.println("Enter your age");
-		int age = keyboard.nextInt();
-		doc.append("age", age);
-		System.out.println("Enter your class");
-		int classof = keyboard.nextInt();
-		doc.append("class", classof);
-		collection.insertOne(doc);
+		while (true) {
+			Document doc = new Document();
+			System.out.println("Enter your name");
+			String name = keyboard.next();
+			doc.append("name", name);
+			System.out.println("Enter your surname");
+			String surname = keyboard.next();
+			doc.append("surname", surname);
+			System.out.println("Enter your age");
+			int age = keyboard.nextInt();
+			doc.append("age", age);
+			System.out.println("Enter your class");
+			int classof = keyboard.nextInt();
+			doc.append("class", classof);
+			collection.insertOne(doc);
+			System.out.println("Do you want to create another document? (yes/no)");
+			String answer = keyboard.next();
+			if (answer.equals("no")) 
+				break;
+		} 
 		keyboard.close();
 	}
 	
