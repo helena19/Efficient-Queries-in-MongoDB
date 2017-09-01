@@ -28,7 +28,8 @@ public class AEMongoCollectionTest {
 	@Test
 	public void shouldAllowForSpecifyingEncryptedFields() {
 		aeMongoCollection.setEncryptedField("e-mail", EncryptionType.HASH);
-		assertEquals("e-mail", aeMongoCollection.getEncryptedFields().get(0));
+		assertEquals(aeMongoCollection.getEncryptedFields().contains("e-mail"),true);
+		//assertEquals("e-mail", aeMongoCollection.getEncryptedFields().get(0));
 	}
 	
 //	@Test

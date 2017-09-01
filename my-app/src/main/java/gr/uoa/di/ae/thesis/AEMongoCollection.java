@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.bson.Document;
 //import org.bson.codecs.configuration.CodecRegistry;
@@ -65,16 +66,11 @@ public class AEMongoCollection {
 			encrypted_fields.put(field, enc);
 	}
 	
-	public List<String> getEncryptedFields()
+	public Set<String> getEncryptedFields()
 	{
-		List<String> enc_fields;
-		enc_fields= new ArrayList<String>() ;
-		for(String field: encrypted_fields.keySet())
-		{
-			enc_fields.add(field);
-		}
-		return enc_fields;
+		return encrypted_fields.keySet();
 	}
+	
 	
 	public void insertOne(Document document,MongoCollection<Document> collection) 
 	{
