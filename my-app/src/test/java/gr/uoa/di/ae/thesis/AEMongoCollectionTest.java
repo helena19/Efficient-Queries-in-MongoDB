@@ -32,15 +32,15 @@ public class AEMongoCollectionTest {
 		//assertEquals("e-mail", aeMongoCollection.getEncryptedFields().get(0));
 	}
 	
-//	@Test
-//	public void shouldAllowForInsertingDocuments() {
-//		
-//		BasicDBObject document = new BasicDBObject("name", "Michael").append("e-mail", "mike@bulls.com")
-//		
-//		aeMongoCollection.insertOne(document);
-//		Document result = aeMongoCollection.find(document).first();
-//		assertEquals(document, result);
-//	}
+	@Test
+	public void shouldAllowForInsertingDocuments() {
+		
+		Document document = new Document("name", "Michael").append("e-mail", "mike@bulls.com");
+		
+		aeMongoCollection.insertOne(document);
+		Document result = aeMongoCollection.find(document);
+		assertEquals(document, result);
+	}
 	
 	
 }

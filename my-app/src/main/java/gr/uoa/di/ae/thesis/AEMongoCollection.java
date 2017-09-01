@@ -28,12 +28,15 @@ public class AEMongoCollection {
 	
 	private Map<String,EncryptionType> encrypted_fields;
 	
+	private MongoCollection<Document> collection;
+	
 	public AEMongoCollection(MongoCollection<Document> collection) {
 		// TODO Auto-generated constructor stub
 		encrypted_fields=new HashMap<String,EncryptionType>();
+		this.collection=collection;
 	}
 
-	public void AEMongoCollectionCreateDoc(MongoCollection<Document> collection) {	
+	public void AEMongoCollectionCreateDoc() {	
 		Scanner keyboard = new Scanner(System.in);
 		while (true) {
 			Document doc = new Document();
@@ -72,7 +75,7 @@ public class AEMongoCollection {
 	}
 	
 	
-	public void insertOne(Document document,MongoCollection<Document> collection) 
+	public void insertOne(Document document) 
 	{
 		for(Entry<String, Object> field:document.entrySet())
 		{
@@ -91,8 +94,8 @@ public class AEMongoCollection {
 	
 	public Document find(Document document)
 	{
-		//TO-DO
-		return null;
+		Document doc=collection.find(document).first();
+		return doc;
 	}
 	
 	
