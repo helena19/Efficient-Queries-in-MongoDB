@@ -1,6 +1,7 @@
 package gr.uoa.di.ae.thesis;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.bson.Document;
 
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.client.FindIterable;
 /*import com.mongodb.ReadConcern;
 import com.mongodb.ReadPreference;
 import com.mongodb.WriteConcern;
@@ -80,23 +82,57 @@ public class AEMongoCollection {
 		for(Entry<String, Object> field:document.entrySet())
 		{
 			String field_name=field.getKey();
-			Object field_value=field.getValue();
+			String field_value=(String) field.getValue();
 			if(encrypted_fields.containsKey(field_name))
 			{
 				EncryptionType enc=encrypted_fields.get(field_name);
 				System.out.println("I have to encrypt field "+field_name+" the value "+field_value);
-				field.setValue("encrypted-email:)");
+//				byte[]   bytesEncoded = Base64.encodeBase64(field_value.getBytes());
+//				String encoded = Base64.getEncoder().encodeToString(field_value.getBytes());
+//				byte [] encoded = Base64.getEncoder().withoutPadding().encodeToString();
+//				field.setValue(new String(encoded));
+				field.setValue("sha256 of "+field_value);
 			}
 					
 		}
 		collection.insertOne(document);
 	}
 	
-	public Document find(Document document)
+	public FindIterable<Document> find(Document document)
 	{
-		Document doc=collection.find(document).first();
+		FindIterable<Document> doc=collection.find(document);
+		if(doc==null)
+			return null;
+		else
+		{
+			for(Document current:doc)
+			{
+				for(Entry<String,Object> field:current.entrySet())
+				{
+					String field_name=field.getKey();
+					Object field_value=field.getValue();
+					if(encrypted_fields.containsKey(field_name))
+					{
+						EncryptionType enc=encrypted_fields.get(field_name);
+						System.out.println("I have to decrypt field "+field_name+" the value "+field_value);
+						String decrypted=((String) field_value).replaceAll("sha256 of ","");
+						field.setValue(decrypted);
+						System.out.println("The decrypted field should be"+decrypted);
+						System.out.println("the decrypted field is "+field.getValue());
+					}
+				}
+			}
+			
+		}
 		return doc;
 	}
 	
+	
+	public void insertMany(List<Document> records) {
+		for(Document doc:records)
+		{
+			collection.insertOne(doc);
+		}
+	}
 	
 }

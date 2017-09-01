@@ -41,7 +41,7 @@ public class AEMongoCollectionTest {
 		Document document = new Document("name", "Michael").append("e-mail", "mike@bulls.com");
 		
 		aeMongoCollection.insertOne(document);
-		FindIterable<Document> result = collection.find(document);
+		FindIterable<Document> result = aeMongoCollection.find(document);
 		assertEquals(document, result.first());
 	}
 	
