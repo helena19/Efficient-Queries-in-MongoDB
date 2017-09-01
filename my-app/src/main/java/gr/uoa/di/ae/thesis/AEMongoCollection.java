@@ -1,5 +1,6 @@
 package gr.uoa.di.ae.thesis;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
@@ -35,10 +36,13 @@ public class AEMongoCollection {
 	
 	private MongoCollection<Document> collection;
 	
+	private Encryption encryption;
+	
 	public AEMongoCollection(MongoCollection<Document> collection) {
 		// TODO Auto-generated constructor stub
 		encrypted_fields=new HashMap<String,EncryptionType>();
 		this.collection=collection;
+		encryption=new Encryption();
 	}
 
 	public void AEMongoCollectionCreateDoc() {	
@@ -80,7 +84,7 @@ public class AEMongoCollection {
 	}
 	
 	
-	public void insertOne(Document document) 
+	public void insertOne(Document document)
 	{
 		for(Entry<String, Object> field:document.entrySet())
 		{
@@ -90,11 +94,9 @@ public class AEMongoCollection {
 			{
 				EncryptionType enc=encrypted_fields.get(field_name);
 				System.out.println("I have to encrypt field "+field_name+" the value "+field_value);
-//				byte[]   bytesEncoded = Base64.encodeBase64(field_value.getBytes());
-//				String encoded = Base64.getEncoder().encodeToString(field_value.getBytes());
-//				byte [] encoded = Base64.getEncoder().withoutPadding().encodeToString();
-//				field.setValue(new String(encoded));
-				field.setValue("sha256 of "+field_value);
+//				String encoded=encryption.sha256_encrypt(field_value);
+				String encoded="sha256 of "+field_value;
+				field.setValue(encoded);
 			}
 					
 		}
@@ -138,6 +140,7 @@ public class AEMongoCollection {
 						EncryptionType enc=encrypted_fields.get(field_name);
 						System.out.println("I have to decrypt field "+field_name+" the value "+field_value);
 						String decrypted=((String) field_value).replaceAll("sha256 of ","");
+//						String decrypted=encryption.sha256_decrypt(((String) field_value));
 						document2.replace(field_name,decrypted);
 						System.out.println("The decrypted field should be"+decrypted);
 						System.out.println("the decrypted field is "+field.getValue());
