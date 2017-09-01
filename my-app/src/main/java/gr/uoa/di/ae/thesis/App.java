@@ -30,7 +30,7 @@ public class App
         
         /*New Entry*/
 		Document document = new Document("name", "Michael").append("e-mail", "mike@bulls.com");
-        myCollection.insertOne(document,collection);
+        myCollection.insertOne(document);
         
         //myCollection.AEMongoCollectionCreateDoc(collection);
         System.out.println("Now,The collection has "+collection.count()+" items");
