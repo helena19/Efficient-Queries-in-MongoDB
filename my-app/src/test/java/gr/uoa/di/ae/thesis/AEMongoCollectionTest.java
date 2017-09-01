@@ -69,8 +69,8 @@ public class AEMongoCollectionTest {
 		FindIterable<Document> result = collection.find(new Document("name", "Michael"));
 		assertEquals("sha256 of mike@bulls.com", result.first().get("e-mail"));
 		
-		result = aeMongoCollection.find(new Document("name", "Michael"));
-		assertEquals("mike@bulls.com", result.first().get("e-mail"));
+		FindIterable<Document> result2=aeMongoCollection.find(new Document("name", "Michael"));
+		assertEquals("mike@bulls.com", result2.first().get("e-mail"));
 		
 	}
 	

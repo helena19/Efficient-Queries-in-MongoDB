@@ -3,6 +3,7 @@ package gr.uoa.di.ae.thesis;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -15,6 +16,7 @@ import org.bson.Document;
 
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
 /*import com.mongodb.ReadConcern;
 import com.mongodb.ReadPreference;
@@ -25,6 +27,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoIterable;
 import com.mongodb.client.model.CreateCollectionOptions;
 import com.mongodb.client.model.CreateViewOptions;*/
+import com.mongodb.client.MongoCursor;
 
 public class AEMongoCollection {
 	
@@ -105,7 +108,8 @@ public class AEMongoCollection {
 			return null;
 		else
 		{
-			for(Document current:doc)
+//			doc.first().replace("e-mail", "mike@bulls.com");
+			/*for(Document current:doc)
 			{
 				for(Entry<String,Object> field:current.entrySet())
 				{
@@ -116,13 +120,33 @@ public class AEMongoCollection {
 						EncryptionType enc=encrypted_fields.get(field_name);
 						System.out.println("I have to decrypt field "+field_name+" the value "+field_value);
 						String decrypted=((String) field_value).replaceAll("sha256 of ","");
-						field.setValue(decrypted);
+						current.replace(field_name,decrypted);
 						System.out.println("The decrypted field should be"+decrypted);
 						System.out.println("the decrypted field is "+field.getValue());
 					}
 				}
+			}*/
+			Set<Document> set=new HashSet<Document>();
+			doc.forEach((Block <Document>) document2 -> 
+			{ 
+				for(Entry<String,Object> field:document2.entrySet())
+				{
+					String field_name=field.getKey();
+					Object field_value=field.getValue();
+					if(encrypted_fields.containsKey(field_name))
+					{
+						EncryptionType enc=encrypted_fields.get(field_name);
+						System.out.println("I have to decrypt field "+field_name+" the value "+field_value);
+						String decrypted=((String) field_value).replaceAll("sha256 of ","");
+						document2.replace(field_name,decrypted);
+						System.out.println("The decrypted field should be"+decrypted);
+						System.out.println("the decrypted field is "+field.getValue());
+					}
+				}
+				set.add(document2);
+				System.out.println("New doc "+document2);
 			}
-			
+			);
 		}
 		return doc;
 	}
