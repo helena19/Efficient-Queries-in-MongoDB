@@ -10,12 +10,8 @@ import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-/**
- * Hello world!
- *
- */
 public class App
-{
+{	
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
@@ -26,10 +22,13 @@ public class App
         MongoDatabase db = mongoClient.getDatabase("thesisdi");
         MongoCollection<Document> collection = db.getCollection("thesis");
         System.out.println(collection.count());
-//        BasicDBObject doc = new BasicDBObject("name", "MongoDB")
-//        .append("type", "database")
-//        .append("count", 1)
-//        .append("info", new BasicDBObject("x", 203).append("y", 102));
+        AEMongoCollection myCollection = new AEMongoCollection(collection);
+        myCollection.AEMongoCollectionCreateDoc(collection);
+        System.out.println(collection.count());
+        
+//        BasicDBObject doc = new BasicDBObject("name", "Mary").append("surname", "Jane").append("age", 21).append("class", 2014);
+//        BasicDBObject doc = new BasicDBObject("name", "MongoDB").append("type", "database").append("count", 1).append("info", new BasicDBObject("x", 203).append("y", 102));
 //        DB db = mongo.getDB("thesisdi");
+        mongoClient.close();
     }
 }
