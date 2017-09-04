@@ -103,7 +103,7 @@ public class AEMongoCollection {
 		collection.insertOne(document);
 	}
 	
-	public FindIterable<Document> find(Document document)
+	public List<Document> find(Document document)
 	{
 		FindIterable<Document> doc=collection.find(document);
 		if(doc==null)
@@ -128,7 +128,7 @@ public class AEMongoCollection {
 					}
 				}
 			}*/
-			Set<Document> set=new HashSet<Document>();
+			List<Document> set=new ArrayList<Document>();
 			doc.forEach((Block <Document>) document2 -> 
 			{ 
 				for(Entry<String,Object> field:document2.entrySet())
@@ -150,8 +150,9 @@ public class AEMongoCollection {
 				System.out.println("New doc "+document2);
 			}
 			);
+			return set;
 		}
-		return doc;
+		
 	}
 	
 	

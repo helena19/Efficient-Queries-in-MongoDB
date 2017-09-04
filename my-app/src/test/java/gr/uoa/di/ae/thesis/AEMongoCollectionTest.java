@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 import org.bson.Document;
 import org.junit.Before;
@@ -41,8 +43,8 @@ public class AEMongoCollectionTest {
 		Document document = new Document("name", "Michael").append("e-mail", "mike@bulls.com");
 		
 		aeMongoCollection.insertOne(document);
-		FindIterable<Document> result = aeMongoCollection.find(document);
-		assertEquals(document, result.first());
+		List<Document> result = aeMongoCollection.find(document);
+		assertEquals(document, result.get(0));
 	}
 	
 	
@@ -53,10 +55,10 @@ public class AEMongoCollectionTest {
 		Document scottie = new Document("name", "Scottie").append("e-mail", "scottie@bulls.com");
 		
 		aeMongoCollection.insertMany((Arrays.asList(mike, scottie)));
-		FindIterable<Document> result = aeMongoCollection.find(mike);
-		assertEquals(mike, result.first());
+		List<Document> result = aeMongoCollection.find(mike);
+		assertEquals(mike, result.get(0));
 		result = aeMongoCollection.find(scottie);
-		assertEquals(scottie, result.first());
+		assertEquals(scottie, result.get(0));
 		
 	}
 	
@@ -69,8 +71,8 @@ public class AEMongoCollectionTest {
 		FindIterable<Document> result = collection.find(new Document("name", "Michael"));
 		assertEquals("sha256 of mike@bulls.com", result.first().get("e-mail"));
 		
-		FindIterable<Document> result2=aeMongoCollection.find(new Document("name", "Michael"));
-		assertEquals("mike@bulls.com", result2.first().get("e-mail"));
+		List<Document> result2=aeMongoCollection.find(new Document("name", "Michael"));
+		assertEquals("mike@bulls.com", result2.get(0).get("e-mail"));
 		
 	}
 	
