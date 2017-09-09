@@ -21,8 +21,8 @@ public class App
         MongoClient mongoClient = new MongoClient(new ServerAddress("ds143151.mlab.com:43151"), Arrays.asList(credential));
 
         MongoDatabase db = mongoClient.getDatabase("thesisdi");
-        MongoCollection<Document> collection = db.getCollection("thesis");
-        System.out.println("The collection has "+collection.count()+" items");
+        MongoCollection <Document> collection = db.getCollection("thesis");
+        System.out.println("The collection has " + collection.count()+" items");
         AEMongoCollection myCollection = new AEMongoCollection(collection);
         
         /*Set the encrypted field*/
@@ -31,7 +31,8 @@ public class App
         /*New Entry*/
 		Document document = new Document("name", "Michael").append("e-mail", "mike@bulls.com");
         myCollection.insertOne(document);
-        
+        Document documentBig = new Document("name", new Document("first", "Michael").append("last", "Jordan")).append("e-mail", "mike@bulls.com");
+        myCollection.insertOne(documentBig);
         //myCollection.AEMongoCollectionCreateDoc(collection);
         System.out.println("Now,The collection has "+collection.count()+" items");
         

@@ -76,4 +76,18 @@ public class AEMongoCollectionTest {
 		
 	}
 	
+	@Test
+	public void shouldStoreHashEncryptedEmbeddedFieldsUsingSHA256Hash() {
+		aeMongoCollection.setEncryptedField("name.last", EncryptionType.HASH);
+		Document document = new Document("name", new Document("first", "Michael").append("last", "Jordan")).append("e-mail", "mike@bulls.com");
+		aeMongoCollection.insertOne(document);
+		
+		FindIterable<Document> result = collection.find(new Document("name", new Document("first", "Michael")));
+		assertEquals("Michael", result.first().get("name.first"));
+		
+		//FindIterable<Document> result2=aeMongoCollection.find(new Document("name", new Document("first", "Michael")));
+		//assertEquals();
+		
+	}
+	
 }
