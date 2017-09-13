@@ -82,11 +82,16 @@ public class AEMongoCollectionTest {
 		Document document = new Document("name", new Document("first", "Michael").append("last", "Jordan")).append("e-mail", "mike@bulls.com");
 		aeMongoCollection.insertOne(document);
 		
-		FindIterable<Document> result = collection.find(new Document("name", new Document("first", "Michael")));
-		assertEquals("Michael", result.first().get("name.first"));
+	//	FindIterable<Document> result = collection.find(new Document("name", new Document("first", "Michael").append("last", "Jordan")).append("e-mail", "mike@bulls.com"));
+		//assertEquals("mike@bulls.com", result.first().get("e-mail"));
 		
-		//FindIterable<Document> result2=aeMongoCollection.find(new Document("name", new Document("first", "Michael")));
-		//assertEquals();
+		FindIterable<Document> result = collection.find(new Document("e-mail","mike@bulls.com" ));
+		assertEquals("mike@bulls.com", result.first().get("e-mail"));
+		System.out.println(result.first());
+		
+		List<Document> result2=aeMongoCollection.find(new Document("e-mail","mike@bulls.com" ));
+		assertEquals("mike@bulls.com", result2.get(0).get("e-mail"));
+		System.out.println(result2.get(0));
 		
 	}
 	
