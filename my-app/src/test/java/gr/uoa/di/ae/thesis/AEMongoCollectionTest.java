@@ -82,17 +82,31 @@ public class AEMongoCollectionTest {
 		Document document = new Document("name", new Document("first", "Michael").append("last", "Jordan")).append("e-mail", "mike@bulls.com");
 		aeMongoCollection.insertOne(document);
 		
-	//	FindIterable<Document> result = collection.find(new Document("name", new Document("first", "Michael").append("last", "Jordan")).append("e-mail", "mike@bulls.com"));
+	//	FindIterable<Document> res = collection.find(new Document("name", new Document("first", "Michael")));
+//		System.out.println("1o document "+res.first());
 		//assertEquals("mike@bulls.com", result.first().get("e-mail"));
 		
-		FindIterable<Document> result = collection.find(new Document("e-mail","mike@bulls.com" ));
+		FindIterable<Document> result = collection.find(new Document("name.first", "Michael").append("e-mail", "mike@bulls.com"));
 		assertEquals("mike@bulls.com", result.first().get("e-mail"));
 		System.out.println(result.first());
 		
-		List<Document> result2=aeMongoCollection.find(new Document("e-mail","mike@bulls.com" ));
+		List<Document> result2=aeMongoCollection.find(new Document("name.first", "Michael").append("e-mail", "mike@bulls.com"));
 		assertEquals("mike@bulls.com", result2.get(0).get("e-mail"));
 		System.out.println(result2.get(0));
 		
+		List<Document> result3=aeMongoCollection.find(new Document("e-mail", "mike@bulls.com"));
+		assertEquals("mike@bulls.com", result3.get(0).get("e-mail"));
+		
+	}
+	
+	
+	@Test
+	public void storeEmbeddeedWithoutEncryption() {
+		Document document = new Document("name", new Document("first", "Michael").append("last", "Jordan")).append("e-mail", "mike@bulls.com");
+		collection.insertOne(document);
+		FindIterable<Document> res = collection.find(new Document("name.first", "Michael").append("e-mail", "mike@bulls.com"));
+		System.out.println("1o document "+res.first());
+		assertEquals("mike@bulls.com", res.first().get("e-mail"));
 	}
 	
 }

@@ -84,6 +84,36 @@ public class AEMongoCollection {
 	
 	public void insertOne(Document document) 
 	{
+		Document doc=encryptDocument(document);
+		collection.insertOne(doc);
+	}
+	
+	public List<Document> find(Document document) {
+		FindIterable<Document> doc = collection.find(encryptDocument(document));
+		if (doc == null)
+			return null;
+		else {
+			List<Document> set=new ArrayList<Document>();
+			doc.forEach((Block <Document>) document2 -> 
+			{ 
+				set.add(decryptDocument(document2));
+				System.out.println("New doc " + document2);
+			}
+			);
+			return set;
+		}
+		
+	}
+	
+	
+	public void insertMany(List<Document> records) {
+		for (Document doc:records) {
+			collection.insertOne(doc);
+		}
+	}
+	
+	public Document encryptDocument(Document document) {
+		
 		for (Entry<String, Object> field: document.entrySet()) 
 		{
 			String field_name = field.getKey();
@@ -139,92 +169,73 @@ public class AEMongoCollection {
 				}
 			}				
 		}    
-		collection.insertOne(document);
+		return document;
 	}
 	
-	public List<Document> find(Document document) {
-		FindIterable<Document> doc = collection.find(document);
-		if (doc == null)
-			return null;
-		else {
-			List<Document> set=new ArrayList<Document>();
-			doc.forEach((Block <Document>) document2 -> 
-			{ 
-				for (Entry<String,Object> field:document2.entrySet()) {
-					String field_name = field.getKey();
-					Object field_value = field.getValue();
-					if (field.getValue() instanceof String) {
-						field_value = (String) field.getValue();
-						if (encrypted_fields.containsKey(field_name)) {
-							EncryptionType enc = encrypted_fields.get(field_name);
-							System.out.println("I have to decrypt field " + field_name + " the value "+field_value);
-							String decrypted = ((String) field_value).replaceAll("sha256 of ","");
-//							String decrypted=encryption.sha256_decrypt(((String) field_value));
-							document2.replace(field_name,decrypted);
-							System.out.println("The decrypted field should be " + decrypted);
-							System.out.println("the decrypted field is " + field.getValue());
-						}
-					}
-					else if (field.getValue() instanceof Integer) {
-						field_value = (Integer) field.getValue();
-						if (encrypted_fields.containsKey(field_name)) {
-							EncryptionType enc = encrypted_fields.get(field_name);
-							System.out.println("I have to decrypt field " + field_name + " the value "+field_value);
-							String decrypted = ((String) field_value).replaceAll("sha256 of ","");
-//							String decrypted=encryption.sha256_decrypt(((String) field_value));
-							document2.replace(field_name,decrypted);
-							System.out.println("The decrypted field should be " + decrypted);
-							System.out.println("the decrypted field is " + field.getValue());
-						}
-					}
-					else if (field.getValue() instanceof Float) {
-						field_value = (Float) field.getValue();
-						if (encrypted_fields.containsKey(field_name)) {
-							EncryptionType enc = encrypted_fields.get(field_name);
-							System.out.println("I have to decrypt field " + field_name + " the value "+field_value);
-							String decrypted = ((String) field_value).replaceAll("sha256 of ","");
-//							String decrypted=encryption.sha256_decrypt(((String) field_value));
-							document2.replace(field_name,decrypted);
-							System.out.println("The decrypted field should be " + decrypted);
-							System.out.println("the decrypted field is " + field.getValue());
-						}
-					}
-					else if (field.getValue() instanceof Document) {
-						System.out.println("I am a document");
-						Document tempDoc = (Document) field.getValue();
-						int i = 0;
-						for (Entry<String, Object> field1: tempDoc.entrySet()) {
-							System.out.println("i is " + i);
-							i += 1;
-							String field_name1 = field_name + "." +field1.getKey();
-							field_value = (String) field1.getValue();
-							System.out.println("Key: " + field_name1 + " Value: " + field_value);
-							if (encrypted_fields.containsKey(field_name1)) {
-								EncryptionType enc = encrypted_fields.get(field_name1);
-								System.out.println("I have to decrypt field " + field_name1 + " the value "+field_value);
-								String decrypted = ((String) field_value).replaceAll("sha256 of ","");
-//								String decrypted=encryption.sha256_decrypt(((String) field_value));
-								field1.setValue(decrypted);//replace(field1,decrypted);
-								System.out.println("The decrypted field should be " + decrypted);
-								System.out.println("the decrypted field is " + field1.getValue());
-							}
-						}
-					}				
+	public Document decryptDocument(Document document)
+	{
+		for (Entry<String,Object> field:document.entrySet()) {
+			String field_name = field.getKey();
+			Object field_value = field.getValue();
+			if (field.getValue() instanceof String) {
+				field_value = (String) field.getValue();
+				if (encrypted_fields.containsKey(field_name)) {
+					EncryptionType enc = encrypted_fields.get(field_name);
+					System.out.println("I have to decrypt field " + field_name + " the value "+field_value);
+					String decrypted = ((String) field_value).replaceAll("sha256 of ","");
+//					String decrypted=encryption.sha256_decrypt(((String) field_value));
+					field.setValue(decrypted);
+					System.out.println("The decrypted field should be " + decrypted);
+					System.out.println("the decrypted field is " + field.getValue());
 				}
-				set.add(document2);
-				System.out.println("New doc " + document2);
 			}
-			);
-			return set;
+			else if (field.getValue() instanceof Integer) {
+				field_value = (Integer) field.getValue();
+				if (encrypted_fields.containsKey(field_name)) {
+					EncryptionType enc = encrypted_fields.get(field_name);
+					System.out.println("I have to decrypt field " + field_name + " the value "+field_value);
+					String decrypted = ((String) field_value).replaceAll("sha256 of ","");
+//					String decrypted=encryption.sha256_decrypt(((String) field_value));
+					field.setValue(decrypted);
+					System.out.println("The decrypted field should be " + decrypted);
+					System.out.println("the decrypted field is " + field.getValue());
+				}
+			}
+			else if (field.getValue() instanceof Float) {
+				field_value = (Float) field.getValue();
+				if (encrypted_fields.containsKey(field_name)) {
+					EncryptionType enc = encrypted_fields.get(field_name);
+					System.out.println("I have to decrypt field " + field_name + " the value "+field_value);
+					String decrypted = ((String) field_value).replaceAll("sha256 of ","");
+//					String decrypted=encryption.sha256_decrypt(((String) field_value));
+					field.setValue(decrypted);
+					System.out.println("The decrypted field should be " + decrypted);
+					System.out.println("the decrypted field is " + field.getValue());
+				}
+			}
+			else if (field.getValue() instanceof Document) {
+				System.out.println("I am a document");
+				Document tempDoc = (Document) field.getValue();
+				int i = 0;
+				for (Entry<String, Object> field1: tempDoc.entrySet()) {
+					System.out.println("i is " + i);
+					i += 1;
+					String field_name1 = field_name + "." +field1.getKey();
+					field_value = (String) field1.getValue();
+					System.out.println("Key: " + field_name1 + " Value: " + field_value);
+					if (encrypted_fields.containsKey(field_name1)) {
+						EncryptionType enc = encrypted_fields.get(field_name1);
+						System.out.println("I have to decrypt field " + field_name1 + " the value "+field_value);
+						String decrypted = ((String) field_value).replaceAll("sha256 of ","");
+//						String decrypted=encryption.sha256_decrypt(((String) field_value));
+						field1.setValue(decrypted);//replace(field1,decrypted);
+						System.out.println("The decrypted field should be " + decrypted);
+						System.out.println("the decrypted field is " + field1.getValue());
+					}
+				}
+			}				
 		}
-		
-	}
-	
-	
-	public void insertMany(List<Document> records) {
-		for (Document doc:records) {
-			collection.insertOne(doc);
-		}
+		return document;
 	}
 	
 }
