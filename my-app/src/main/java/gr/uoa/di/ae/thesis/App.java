@@ -31,24 +31,24 @@ public class App
         System.out.println("The collection has " + collection.count()+" items");
         AEMongoCollection myCollection = new AEMongoCollection(collection,field_colletion);
         
-        /*Set the encrypted field if they aren't already set*/
+        /*Set the encrypted fields if they aren't already set*/
         myCollection.setEncryptedField("e-mail",EncryptionType.HASH);
         myCollection.setEncryptedField("name.last",EncryptionType.HASH);
                
         /*New 100 Entries*/
-//        long startTime2 = System.nanoTime();
-//		DataFactory df = new DataFactory();
-//        for (int i = 0; i < 100; i++) {          
-//            Document doc = new Document("name",df.getFirstName()).append("surname", df.getLastName()).append("e-mail",df.getEmailAddress()).append("date",df.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
-//            myCollection.insertOne(doc);
-//        }
-//        long endTime2 = System.nanoTime();
-//        long duration2 = (endTime2 - startTime2);
-//        System.out.println("Inserting all records with our way "+duration2/1000000000);
-//        System.out.println("Now,The collection has "+collection.count()+" items");
+        long startTime2 = System.nanoTime();
+		DataFactory df = new DataFactory();
+        for (int i = 0; i < 100; i++) {          
+            Document doc = new Document("name",df.getFirstName()).append("surname", df.getLastName()).append("e-mail",df.getEmailAddress()).append("date",df.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            myCollection.insertOne(doc);
+        }
+        long endTime2 = System.nanoTime();
+        long duration2 = (endTime2 - startTime2);
+        System.out.println("Inserting all records with our way "+duration2/1000000000);
+        System.out.println("Now,The collection has "+collection.count()+" items");
         
         
-        /*Print All Inserts At the Collection*/
+        /*Print All The Documents of the Collection (Using Mongo's way)*/
         System.out.println("All the inserts ");
         long startTime1 = System.nanoTime();
         MongoCursor<Document> cursor = collection.find().iterator();
@@ -61,7 +61,7 @@ public class App
         }
         long endTime1 = System.nanoTime();
         long duration1 = (endTime1 - startTime1);
-        System.out.println("Finding all records mongo's way "+TimeUnit.SECONDS.convert(duration1, TimeUnit.NANOSECONDS));
+        System.out.println("Finding all records mongo's way "+duration1/1000000000);
         
         
        MongoCursor<Document> cursor3 = field_colletion.find().iterator();
@@ -74,8 +74,8 @@ public class App
         }
         
         
+        /*Print All The Documents of the Collection (modified appropriately)*/
         long startTime = System.nanoTime();
-        /*Print All Inserts At the Collection modified*/
        Iterator<Document> cursor2 = myCollection.find().iterator();
        while (cursor2.hasNext()) {
            System.out.println(cursor2.next().toJson());
@@ -83,10 +83,7 @@ public class App
        long endTime = System.nanoTime();
        long duration = (endTime - startTime);
        System.out.println("Finding all records with our way ( \" decoding \") "+duration/1000000000);
-        
-//        BasicDBObject doc = new BasicDBObject("name", "Mary").append("surname", "Jane").append("age", 21).append("class", 2014);
-//        BasicDBObject doc = new BasicDBObject("name", "MongoDB").append("type", "database").append("count", 1).append("info", new BasicDBObject("x", 203).append("y", 102));
-//        DB db = mongo.getDB("thesisdi");
+
         mongoClient.close();
     }
 }
