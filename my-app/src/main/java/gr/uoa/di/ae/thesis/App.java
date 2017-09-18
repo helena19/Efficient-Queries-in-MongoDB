@@ -1,6 +1,7 @@
 package gr.uoa.di.ae.thesis;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.bson.Document;
 
@@ -22,12 +23,13 @@ public class App
 
         MongoDatabase db = mongoClient.getDatabase("thesisdi");
         MongoCollection <Document> collection = db.getCollection("thesis");
+        MongoCollection <Document> field_colletion=db.getCollection("keys");
         System.out.println("The collection has " + collection.count()+" items");
-        AEMongoCollection myCollection = new AEMongoCollection(collection);
+        AEMongoCollection myCollection = new AEMongoCollection(collection,field_colletion);
         
         /*Set the encrypted field*/
         myCollection.setEncryptedField("e-mail",EncryptionType.HASH);
-        
+        myCollection.setEncryptedField("name.last",EncryptionType.HASH);
         /*New Entry*/
 		Document document = new Document("name", "Michael").append("e-mail", "mike@bulls.com");
         myCollection.insertOne(document);
@@ -36,7 +38,6 @@ public class App
         //myCollection.AEMongoCollectionCreateDoc(collection);
         System.out.println("Now,The collection has "+collection.count()+" items");
         
-        System.out.println("The encrypted fields so far "+myCollection.getEncryptedFields());
         
         /*Print All Inserts At the Collection*/
         MongoCursor<Document> cursor = collection.find().iterator();
@@ -47,6 +48,21 @@ public class App
         } finally {
             cursor.close();
         }
+        
+        
+        MongoCursor<Document> cursor3 = field_colletion.find().iterator();
+        try {
+            while (cursor3.hasNext()) {
+                System.out.println("Encrypted field"+cursor3.next().toJson());
+            }
+        } finally {
+            cursor3.close();
+        }
+        
+        
+       List<Document> cursor2 = myCollection.find();
+       System.out.println(cursor2);
+       
         
         
 //        BasicDBObject doc = new BasicDBObject("name", "Mary").append("surname", "Jane").append("age", 21).append("class", 2014);

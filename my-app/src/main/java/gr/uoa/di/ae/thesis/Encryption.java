@@ -1,5 +1,6 @@
 package gr.uoa.di.ae.thesis;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -10,15 +11,7 @@ public class Encryption {
 		
 	public String sha256_encrypt(String str)
 	{
-		MessageDigest digest = null;
-		try {
-			digest = MessageDigest.getInstance("SHA-256");
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		byte[] hash = digest.digest(str.getBytes(StandardCharsets.UTF_8));
-		String encoded = Base64.getEncoder().encodeToString(hash);
+		String encoded = DigestUtils.sha256Hex(str);
 	    return encoded;
 	}
 	
