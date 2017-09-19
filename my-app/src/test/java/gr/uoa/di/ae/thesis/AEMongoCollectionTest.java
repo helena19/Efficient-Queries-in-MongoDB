@@ -1,18 +1,17 @@
 package gr.uoa.di.ae.thesis;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
+
 
 import org.bson.Document;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.github.fakemongo.Fongo;
-import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 
