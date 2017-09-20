@@ -1,8 +1,12 @@
 package gr.uoa.di.ae.thesis;
 
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import javax.crypto.NoSuchPaddingException;
 
 import org.bson.Document;
 
@@ -20,6 +24,7 @@ public class AEMongoCollectionRandomPass {
 	private MongoCollection<Document> randomPassDocKey;
 	private RandomPassEncryption encryption;
 	private Map<String, String> encryptedFields;
+
 	
 	/*Constructor*/
 	public AEMongoCollectionRandomPass(MongoCollection<Document> randomPassCollection, MongoCollection<Document> randomPassFieldCollection, MongoCollection<Document> randomPassDocKey) {
@@ -46,7 +51,7 @@ public class AEMongoCollectionRandomPass {
 	}
 	
 	/*Encrypt the document with random pass and keep doc id with its random pass*/
-	public void insertOneRandomPass(Document document) {
+	public void insertOneRandomPass(Document document) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException {
 		String key = "";
 		EncryptionResult result = encryptDocumentRandomPass(document, "", key);
 		randomPassCollection.insertOne(result.getDocument());
@@ -54,7 +59,7 @@ public class AEMongoCollectionRandomPass {
 		randomPassDocKey.insertOne(tempDoc);
 	}
 	
-	public EncryptionResult encryptDocumentRandomPass(Document document, String pathD, String docKey) {
+	public EncryptionResult encryptDocumentRandomPass(Document document, String pathD, String docKey) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException {
 		String fieldName;
 		String path;
 		Object fieldValue;
@@ -72,21 +77,24 @@ public class AEMongoCollectionRandomPass {
 			}
 			else if (fieldValue instanceof String) {
 				String stringValue = (String) fieldValue;
-				encryptFieldRandomPass(path, stringValue, field);
+				//String key = "";
+				encryptFieldRandomPass(path, stringValue, field);//, key);
 				if (!stringValue.equals((String) field.getValue()))
 					docKey = (String) field.getValue();
 			}
 			else if (fieldValue instanceof Integer) {
 				Integer integerValue = (Integer) fieldValue;
-				encryptFieldRandomPass(path, integerValue.toString(), field);
+				//String key = "";
+				encryptFieldRandomPass(path, integerValue.toString(), field);//, key);
 				if (!integerValue.equals(field.getValue()))
-					docKey = (String) field.getValue();
+					docKey = field.getValue().toString();
 			}
 			else if (fieldValue instanceof Float) {
 				Float floatValue = (Float) fieldValue;
-				encryptFieldRandomPass(path, floatValue.toString(), field);
+				//String key = "";
+				encryptFieldRandomPass(path, floatValue.toString(), field);//, key);
 				if (!floatValue.equals(field.getValue()))
-					docKey = (String) field.getValue();
+					docKey = field.getValue().toString();
 			}
 		}
 		EncryptionResult res = new EncryptionResult(document, docKey);
@@ -97,11 +105,23 @@ public class AEMongoCollectionRandomPass {
 		Document doc = randomPassFieldCollection.find(new Document("field", path)).first();
 		if (doc != null) {
 			if (doc.get("Encryption Type").equals("random")) {
-				String encoded = encryption.randomPassEncrypt(valueToEncrypt);
+				String encoded = encryption.randomPassEncrypt1(valueToEncrypt);
 				field.setValue(encoded);
 			}
 		}
 	}
+	
+	//public void encryptFieldRandomPass(String path, String valueToEncrypt, Entry<String, Object> field, String key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException {
+	//	Document doc = randomPassFieldCollection.find(new Document("field", path)).first();
+	//	if (doc != null) {
+	//		if (doc.get("Encryption Type").equals("random")) {
+	//			byte[] value = valueToEncrypt.getBytes();
+	//			Encoding password = encryption.randomPassEncrypt2(value);
+	//			key = password.getKey().toString();
+	//			field.setValue(password.getEncoded());
+	//		}
+	//	}
+	//}
 	
 	public void importEncryptedFields() {
 		randomPassFieldCollection.find().forEach((Block <Document>) document ->
