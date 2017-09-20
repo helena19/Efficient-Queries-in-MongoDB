@@ -16,7 +16,7 @@ public class AEMongoClient {
 	}
 	
 	public AEMongoCollection getCollection(String databaseName, String collectionName) {
-		return new AEMongoCollection(mc.getDatabase(databaseName).getCollection(collectionName));
+		return new AEMongoCollection(mc.getDatabase(databaseName).getCollection(collectionName), null);
 	}
 	
 	public void setEncryptedFieldInCollection(AEMongoCollection collection, String fieldName, EncryptionType et) {

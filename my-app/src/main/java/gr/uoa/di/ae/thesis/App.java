@@ -23,41 +23,61 @@ public class App
 
         MongoDatabase db = mongoClient.getDatabase("thesisdi");
         MongoCollection <Document> collection = db.getCollection("thesis");
-        MongoCollection <Document> field_colletion=db.getCollection("keys");
+        MongoCollection <Document> fieldCollection=db.getCollection("keys");
+        
+        /*Random encryption*/
+        MongoCollection <Document> randomPassCollection = db.getCollection("randomPassThesis");
+        MongoCollection <Document> randomPassFieldCollection = db.getCollection("randomPassKeys");
+        MongoCollection <Document> randomPassDocKey = db.getCollection("randomPassDocKey");
+        
         System.out.println("The collection has " + collection.count()+" items");
-        AEMongoCollection myCollection = new AEMongoCollection(collection,field_colletion);
+        AEMongoCollection myCollection = new AEMongoCollection(collection,fieldCollection);
+        AEMongoCollectionRandomPass myCollectionRandomPass = new AEMongoCollectionRandomPass(randomPassCollection, randomPassFieldCollection, randomPassDocKey);
         
         /*Set the encrypted fields if they aren't already set*/
-        myCollection.setEncryptedField("e-mail",EncryptionType.HASH);
-        myCollection.setEncryptedField("name.last",EncryptionType.HASH);
+        myCollection.setEncryptedField("e-mail", EncryptionType.HASH);
+        
+        myCollectionRandomPass.setEncryptedFieldRandomPass("e-mail", EncryptionType.RANDOM);
                
         collection.drop();//delete the collection
-        
+        randomPassCollection.drop();
+        randomPassDocKey.drop();
         
         System.out.println("Now,The collection has "+collection.count()+" items");
        
         
         /*Bring the Encrypted fields statically/topically*/
         myCollection.importEncryptedFields();
-
+        myCollectionRandomPass.importEncryptedFields();
         
         /*New 100 Entries*/
         long startTime2 = System.nanoTime();
 		DataFactory df = new DataFactory();
-        for (int i = 0; i < 100; i++) 
-        {          
+        for (int i = 0; i < 10; i++) {          
             Document doc = new Document("name",df.getFirstName()).append("surname", df.getLastName()).append("e-mail",df.getEmailAddress()).append("date",df.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             myCollection.insertOne(doc);
             //collection.insertOne(doc); //Mongodb's driver
         }
         long endTime2 = System.nanoTime();
         long duration2 = (endTime2 - startTime2);
-        System.out.println("Inserting all records with our way "+duration2/1000000000+" secs");
-        System.out.println("Now,The collection has "+collection.count()+" items");
+        System.out.println("Inserting all records with our way " + duration2/1000000000+" secs");
+        System.out.println("Now,The collection has " + collection.count() + " items");
+        
+        
+        long startTime3 = System.nanoTime();
+		System.out.println("Starting random password");
+        for (int i = 0; i < 10; i++) 
+        {          
+            Document doc = new Document("name",df.getFirstName()).append("surname", df.getLastName()).append("e-mail",df.getEmailAddress()).append("date",df.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            myCollectionRandomPass.insertOneRandomPass(doc);
+        }
+        long endTime3 = System.nanoTime();
+        long duration3 = (endTime3 - startTime3);
+        System.out.println("Inserting all records with the slow way " + duration3/1000000000 + " secs");
         
         
         /*Print All The Documents of the Collection (Using Mongo's way)*/
-        System.out.println("All the inserts ");
+        System.out.println("All the inserts");
         long startTime1 = System.nanoTime();
         MongoCursor<Document> cursor = collection.find().iterator();
         try {
@@ -72,7 +92,7 @@ public class App
         System.out.println("Finding all records mongo's way "+duration1/1000000000+" secs");
         
         
-       MongoCursor<Document> cursor3 = field_colletion.find().iterator();
+       MongoCursor<Document> cursor3 = fieldCollection.find().iterator();
         try {
             while (cursor3.hasNext()) {
                 System.out.println("Encrypted field"+cursor3.next().toJson());

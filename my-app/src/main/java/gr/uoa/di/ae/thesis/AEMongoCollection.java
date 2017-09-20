@@ -9,8 +9,6 @@ import java.util.Map.Entry;
 
 import org.bson.Document;
 
-
-
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
 
@@ -20,18 +18,18 @@ public class AEMongoCollection {
 	
 	private MongoCollection<Document> collection;
 	
-	private MongoCollection<Document> field_collection;
+	private MongoCollection<Document> fieldCollection;
 	
 	private Encryption encryption;
 	
-	private Map<String,String> enc_fields;
+	private Map<String,String> encFields;
 	
-	public AEMongoCollection(MongoCollection<Document> collection,MongoCollection<Document> field_collection) {
+	public AEMongoCollection(MongoCollection<Document> collection,MongoCollection<Document> fieldCollection) {
 		// TODO Auto-generated constructor stub
 		this.collection = collection;
-		this.field_collection=field_collection;
+		this.fieldCollection=fieldCollection;
 		encryption = new Encryption();
-		enc_fields=new HashMap<String,String>();
+		encFields=new HashMap<String,String>();
 	}
 
 	/*Insert the encrypted field in the dedicated collection,
@@ -42,11 +40,11 @@ public class AEMongoCollection {
 		if(enc==EncryptionType.HASH)
 			enc2+="hash";
 		Document doc=new Document("field",field).append("enc",enc2);
-		if(field_collection.find(doc).first()!=null)
+		if(fieldCollection.find(doc).first()!=null)
 			System.out.println("You have already defined an encryption type for the field " + field);
 		else
 		{
-			field_collection.insertOne(doc);
+			fieldCollection.insertOne(doc);
 		}
 			
 	}
@@ -54,9 +52,9 @@ public class AEMongoCollection {
 	/*Bring all the EncryptedFields at the Online Collection statically (topically)*/
 	public void importEncryptedFields() 
 	{
-		field_collection.find().forEach( (Block <Document>) document ->
+		fieldCollection.find().forEach( (Block <Document>) document ->
 		{
-			enc_fields.put((String )document.get("field"),(String) document.get("enc"));
+			encFields.put((String )document.get("field"),(String) document.get("enc"));
 		});
 	}
 
@@ -111,38 +109,38 @@ public class AEMongoCollection {
 	/*Encrypt a Document using the right type of encryption*/
 	public Document encryptDocument(Document document,String pathD) 
 	{
-		String field_name;
+		String fieldName;
 		String path;
-		Object field_value;
+		Object fieldValue;
 		for (Entry<String, Object> field: document.entrySet()) 
 		{
-			field_name = field.getKey();
+			fieldName = field.getKey();
 			path="";
 			if(!pathD.equals(""))
-				path=pathD+"."+field_name;
+				path=pathD+"."+fieldName;
 			else
-				path=path+field_name;
+				path=path+fieldName;
 			
-			field_value =field.getValue();
-			if (field_value instanceof Document) 
+			fieldValue =field.getValue();
+			if (fieldValue instanceof Document) 
 			{
-				Document tempDoc = (Document) field_value;
+				Document tempDoc = (Document) fieldValue;
 				encryptDocument(tempDoc,path);
 			}		
-			else if (field_value instanceof String) 
+			else if (fieldValue instanceof String) 
 			{
-				String string_value = (String) field_value;
-				encryptIfNeeded2(path,string_value,field);
+				String stringValue = (String) fieldValue;
+				encryptIfNeeded2(path,stringValue,field);
 			}
-			else if (field_value instanceof Integer) 
+			else if (fieldValue instanceof Integer) 
 			{
-				Integer integer_value = (Integer) field_value;
-				encryptIfNeeded2(path,Integer.toString(integer_value),field);
+				Integer integerValue = (Integer) fieldValue;
+				encryptIfNeeded2(path,Integer.toString(integerValue),field);
 			}
-			else if (field_value instanceof Float)
+			else if (fieldValue instanceof Float)
 			{
-				Float float_value = (Float) field_value;
-				encryptIfNeeded2(path,Float.toString(float_value),field);
+				Float floatValue = (Float) fieldValue;
+				encryptIfNeeded2(path,Float.toString(floatValue),field);
 			}			
 		}    
 		return document;
@@ -169,7 +167,7 @@ public class AEMongoCollection {
 			}		
 			else
 			{
-				if ( enc_fields.containsKey(path)) {
+				if ( encFields.containsKey(path)) {
 					field.setValue("SECRET VALUE");
 				}
 			}
@@ -179,7 +177,7 @@ public class AEMongoCollection {
 	
 	/*Return True if the field is in the encrypted "list",otherwise false*/
 	public boolean isEncryptedField(String field){	
-		if(field_collection.find(new Document("field",field)).first()!=null)
+		if(fieldCollection.find(new Document("field",field)).first()!=null)
 			return true;
 		else
 			return false;
@@ -188,7 +186,7 @@ public class AEMongoCollection {
 	/*Return the Type of encryption the field uses*/
 	public EncryptionType  usesEncryption(String field)
 	{
-		if(field_collection.find(new Document("field",field)).first().get("enc").equals("hash"))
+		if(fieldCollection.find(new Document("field",field)).first().get("enc").equals("hash"))
 			return EncryptionType.HASH;
 		return null;
 	}
@@ -196,7 +194,7 @@ public class AEMongoCollection {
 	/*Encrypt the field "path" of the document if needed connecting to FieldCollection*/
 	public void encryptIfNeeded(String path,String value,Entry<String,Object> field)
 	{
-		Document doc =field_collection.find(new Document("field",path)).first();
+		Document doc =fieldCollection.find(new Document("field",path)).first();
 		if ( doc!=null)
 		{
 			if(doc.get("enc").equals("hash"))
@@ -212,9 +210,9 @@ public class AEMongoCollection {
 	public void encryptIfNeeded2(String path,String value,Entry<String,Object> field)
 	{
 		//Document doc =field_collection.find(new Document("field",path)).first();
-		if ( enc_fields.containsKey(path))
+		if ( encFields.containsKey(path))
 		{
-			if(enc_fields.get(path).equals("hash"))
+			if(encFields.get(path).equals("hash"))
 			{
 				String encoded=encryption.sha256_encrypt(value);
 				field.setValue(encoded);
