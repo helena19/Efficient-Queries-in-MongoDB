@@ -25,6 +25,12 @@ public class AEMongoCollectionRandomPass {
 	private RandomPassEncryption encryption;
 	private Map<String, String> encryptedFields;
 
+	private final String ENCRYPTION_TYPE;
+	private final String RANDOM;
+	private final String FIELD;
+	private final String RANDOM_KEY;
+	private final String DOC_ID;
+	private final String ID;
 	
 	/*Constructor*/
 	public AEMongoCollectionRandomPass(MongoCollection<Document> randomPassCollection, MongoCollection<Document> randomPassFieldCollection, MongoCollection<Document> randomPassDocKey) {
@@ -33,15 +39,22 @@ public class AEMongoCollectionRandomPass {
 		this.randomPassDocKey = randomPassDocKey;
 		encryption = new RandomPassEncryption();
 		encryptedFields = new HashMap<String, String>();
+		ENCRYPTION_TYPE = "Encryption Type";
+		RANDOM = "random";
+		FIELD = "field";
+		RANDOM_KEY= "RandomKey";
+		DOC_ID = "DocID";
+		ID = "_id";
+		
 	}
 	
 	/*Set the encryption to random*/
 	public void setEncryptedFieldRandomPass(String field, EncryptionType enc) {
 		String encryptionType = "";
 		if (enc == EncryptionType.RANDOM) {
-			encryptionType = encryptionType + "random";
+			encryptionType = encryptionType + RANDOM;
 		}
-		Document doc = new Document("field", field).append("Encryption Type", encryptionType);
+		Document doc = new Document(FIELD, field).append(ENCRYPTION_TYPE, encryptionType);
 		if (randomPassFieldCollection.find(doc).first() != null) {
 			System.out.println("You have already defined an encryption type for the field " + field);			
 		}
@@ -55,7 +68,7 @@ public class AEMongoCollectionRandomPass {
 		String key = "";
 		EncryptionResult result = encryptDocumentRandomPass(document, "", key);
 		randomPassCollection.insertOne(result.getDocument());
-		Document tempDoc = new Document("DocID", result.getDocument().get("_id")).append("RandomKey", result.getKey());
+		Document tempDoc = new Document(DOC_ID, result.getDocument().get(ID)).append(RANDOM_KEY, result.getKey());
 		randomPassDocKey.insertOne(tempDoc);
 	}
 	
@@ -102,9 +115,9 @@ public class AEMongoCollectionRandomPass {
 	}
 	
 	public void encryptFieldRandomPass(String path, String valueToEncrypt, Entry<String, Object> field) {
-		Document doc = randomPassFieldCollection.find(new Document("field", path)).first();
+		Document doc = randomPassFieldCollection.find(new Document(FIELD, path)).first();
 		if (doc != null) {
-			if (doc.get("Encryption Type").equals("random")) {
+			if (doc.get(ENCRYPTION_TYPE).equals(RANDOM)) {
 				String encoded = encryption.randomPassEncrypt1(valueToEncrypt);
 				field.setValue(encoded);
 			}
@@ -126,7 +139,7 @@ public class AEMongoCollectionRandomPass {
 	public void importEncryptedFields() {
 		randomPassFieldCollection.find().forEach((Block <Document>) document ->
 		{
-			encryptedFields.put((String)document.get("field"), (String) document.get("enc"));
+			encryptedFields.put((String)document.get(FIELD), (String) document.get(ENCRYPTION_TYPE));
 		});
 	}
 	
