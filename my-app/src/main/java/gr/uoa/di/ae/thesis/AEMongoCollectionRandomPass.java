@@ -6,9 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 
 import org.bson.Document;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.mongodb.Block;
 
@@ -25,27 +27,26 @@ public class AEMongoCollectionRandomPass {
 	private RandomPassEncryption encryption;
 	private Map<String, String> encryptedFields;
 
-	private final String ENCRYPTION_TYPE;
-	private final String RANDOM;
-	private final String FIELD;
-	private final String RANDOM_KEY;
-	private final String DOC_ID;
-	private final String ID;
+	private static final String ENCRYPTION_TYPE = "Encryption Type";
+	private static final String RANDOM = "random";
+	private static final String FIELD ="field";
+	private static final String RANDOM_KEY = "RandomKey";
+	private static final String DOC_ID = "DocID";
+	private static final String ID = "_id";
+	private static final String ALGORITHM = "AES";
+	
+	private BCryptPasswordEncoder encoder;
+	private Cipher cipher;
 	
 	/*Constructor*/
-	public AEMongoCollectionRandomPass(MongoCollection<Document> randomPassCollection, MongoCollection<Document> randomPassFieldCollection, MongoCollection<Document> randomPassDocKey) {
+	public AEMongoCollectionRandomPass(MongoCollection<Document> randomPassCollection, MongoCollection<Document> randomPassFieldCollection, MongoCollection<Document> randomPassDocKey) throws NoSuchAlgorithmException, NoSuchPaddingException {
 		this.randomPassCollection = randomPassCollection;
 		this.randomPassFieldCollection = randomPassFieldCollection;
 		this.randomPassDocKey = randomPassDocKey;
 		encryption = new RandomPassEncryption();
 		encryptedFields = new HashMap<String, String>();
-		ENCRYPTION_TYPE = "Encryption Type";
-		RANDOM = "random";
-		FIELD = "field";
-		RANDOM_KEY= "RandomKey";
-		DOC_ID = "DocID";
-		ID = "_id";
-		
+		encoder = new BCryptPasswordEncoder();
+		cipher = Cipher.getInstance(ALGORITHM);
 	}
 	
 	/*Set the encryption to random*/
@@ -118,8 +119,9 @@ public class AEMongoCollectionRandomPass {
 		Document doc = randomPassFieldCollection.find(new Document(FIELD, path)).first();
 		if (doc != null) {
 			if (doc.get(ENCRYPTION_TYPE).equals(RANDOM)) {
-				String encoded = encryption.randomPassEncrypt1(valueToEncrypt);
+				String encoded = encryption.randomPassEncrypt3(valueToEncrypt);//, cipher);
 				field.setValue(encoded);
+				System.out.println("Document encrypted");
 			}
 		}
 	}
@@ -129,7 +131,7 @@ public class AEMongoCollectionRandomPass {
 	//	if (doc != null) {
 	//		if (doc.get("Encryption Type").equals("random")) {
 	//			byte[] value = valueToEncrypt.getBytes();
-	//			Encoding password = encryption.randomPassEncrypt2(value);
+	//			Encoding password = encryption.randomPassEncrypt2(value, cipher);
 	//			key = password.getKey().toString();
 	//			field.setValue(password.getEncoded());
 	//		}

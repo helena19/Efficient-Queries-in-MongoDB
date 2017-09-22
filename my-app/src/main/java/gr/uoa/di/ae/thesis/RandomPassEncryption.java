@@ -20,15 +20,12 @@ public class RandomPassEncryption {
 	
 	private static final String ALGORITHM = "AES";
 
-	public String randomPassEncrypt1(String str) {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		System.out.println("Password encoder is " + passwordEncoder.toString());
+	public String randomPassEncrypt1(String str, BCryptPasswordEncoder passwordEncoder) {
 		String encoded = passwordEncoder.encode(str);
 		return encoded;
 	}
 	
-	public Encoding randomPassEncrypt2(byte[] str) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
-			Cipher c = Cipher.getInstance(ALGORITHM);
+	public Encoding randomPassEncrypt2(byte[] str, Cipher c) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
 			Key key = new SecretKeySpec(str, ALGORITHM);
 			c.init(Cipher.ENCRYPT_MODE, key);
 			String encoded = ((PasswordEncoder) new BasicBSONDecoder()).encode(str.toString());
