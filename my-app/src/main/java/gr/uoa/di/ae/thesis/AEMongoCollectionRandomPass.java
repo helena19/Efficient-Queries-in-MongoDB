@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.crypto.Cipher;
+//import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 
 import org.bson.Document;
@@ -33,10 +33,10 @@ public class AEMongoCollectionRandomPass {
 	private static final String RANDOM_KEY = "RandomKey";
 	private static final String DOC_ID = "DocID";
 	private static final String ID = "_id";
-	private static final String ALGORITHM = "AES";
+	//private static final String ALGORITHM = "AES";
 	
 	private BCryptPasswordEncoder encoder;
-	private Cipher cipher;
+	//private Cipher cipher;
 	
 	/*Constructor*/
 	public AEMongoCollectionRandomPass(MongoCollection<Document> randomPassCollection, MongoCollection<Document> randomPassFieldCollection, MongoCollection<Document> randomPassDocKey) throws NoSuchAlgorithmException, NoSuchPaddingException {
@@ -46,7 +46,7 @@ public class AEMongoCollectionRandomPass {
 		encryption = new RandomPassEncryption();
 		encryptedFields = new HashMap<String, String>();
 		encoder = new BCryptPasswordEncoder();
-		cipher = Cipher.getInstance(ALGORITHM);
+		//cipher = Cipher.getInstance(ALGORITHM);
 	}
 	
 	/*Set the encryption to random*/
@@ -67,13 +67,14 @@ public class AEMongoCollectionRandomPass {
 	/*Encrypt the document with random pass and keep doc id with its random pass*/
 	public void insertOneRandomPass(Document document) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException {
 		String key = "";
-		EncryptionResult result = encryptDocumentRandomPass(document, "", key);
+		EncryptionResult result = new EncryptionResult();
+		encryptDocumentRandomPass(document, "", key, result);
 		randomPassCollection.insertOne(result.getDocument());
 		Document tempDoc = new Document(DOC_ID, result.getDocument().get(ID)).append(RANDOM_KEY, result.getKey());
 		randomPassDocKey.insertOne(tempDoc);
 	}
 	
-	public EncryptionResult encryptDocumentRandomPass(Document document, String pathD, String docKey) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException {
+	public void encryptDocumentRandomPass(Document document, String pathD, String docKey, EncryptionResult res) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException {
 		String fieldName;
 		String path;
 		Object fieldValue;
@@ -87,7 +88,7 @@ public class AEMongoCollectionRandomPass {
 			fieldValue = field.getValue();
 			if (fieldValue instanceof Document) {
 				Document tempDoc = (Document) fieldValue;
-				encryptDocumentRandomPass(tempDoc, path, docKey);
+				encryptDocumentRandomPass(tempDoc, path, docKey, res);
 			}
 			else if (fieldValue instanceof String) {
 				String stringValue = (String) fieldValue;
@@ -111,25 +112,24 @@ public class AEMongoCollectionRandomPass {
 					docKey = field.getValue().toString();
 			}
 		}
-		EncryptionResult res = new EncryptionResult(document, docKey);
-		return res;
+		//res = new EncryptionResult(document, docKey);
+		res.setDocument(document);
+		res.setKey(docKey);
+		//return res;
 	}
 	
 	public void encryptFieldRandomPass(String path, String valueToEncrypt, Entry<String, Object> field) {
-		Document doc = randomPassFieldCollection.find(new Document(FIELD, path)).first();
-		if (doc != null) {
-			if (doc.get(ENCRYPTION_TYPE).equals(RANDOM)) {
-				String encoded = encryption.randomPassEncrypt3(valueToEncrypt);//, cipher);
+		if (encryptedFields.containsKey(path)) {
+			if (encryptedFields.get(path).equals(RANDOM)) {
+				String encoded = encryption.randomPassEncrypt1(valueToEncrypt, encoder);
 				field.setValue(encoded);
-				System.out.println("Document encrypted");
 			}
 		}
 	}
 	
 	//public void encryptFieldRandomPass(String path, String valueToEncrypt, Entry<String, Object> field, String key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException {
-	//	Document doc = randomPassFieldCollection.find(new Document("field", path)).first();
-	//	if (doc != null) {
-	//		if (doc.get("Encryption Type").equals("random")) {
+	//	if (encryptedFields.containsKey(path)) {
+	//if (encryptedFields.get(path).equals(RANDOM)) {
 	//			byte[] value = valueToEncrypt.getBytes();
 	//			Encoding password = encryption.randomPassEncrypt2(value, cipher);
 	//			key = password.getKey().toString();
