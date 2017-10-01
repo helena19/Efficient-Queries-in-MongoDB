@@ -2,7 +2,6 @@ package gr.uoa.di.ae.thesis;
 
 import java.security.Key;
 import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,22 +12,12 @@ import java.util.Base64;
 
 public class RandomPassEncryption {
 	
-	private static final String ALGORITHM = "AES";
-	//private static final byte[] keyValue = new byte[]{'T', 'h', 'e', 'B', 'e', 's', 't', 'S', 'e', 'c', 'r', 'e', 't', 'K', 'e', 'y'};
-
 	public String randomPassEncryptBCRYPT(String str, BCryptPasswordEncoder passwordEncoder) {
 		String encoded = passwordEncoder.encode(str);
 		return encoded;
 	}
 	
-	private static Key generateKey() throws Exception {
-		String keyValue = RandomStringUtils.random(32);
-		byte[] aesKey = keyValue.getBytes();
-		return new SecretKeySpec(aesKey, ALGORITHM);
-	}
-	
-	public Encoding randomPassEncryptAES(String str, Cipher c) throws Exception {
-		Key key = generateKey();
+	public Encoding randomPassEncryptAES(String str, Cipher c, Key key) throws Exception {
         c.init(Cipher.ENCRYPT_MODE, key);
         byte[] encVal = c.doFinal(str.getBytes());
         Encoding encoding = new Encoding(Base64.getEncoder().encodeToString(encVal), key);

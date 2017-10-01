@@ -1,7 +1,7 @@
 package gr.uoa.di.ae.thesis;
 
+import java.security.Key;
 //import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,8 +9,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.crypto.Cipher;
-import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.bson.Document;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -39,12 +40,13 @@ public class AEMongoCollection {
 	
 	private static final String ALGORITHM = "AES";
 	private Cipher cipher;
+	private Key key;
 	
 	//private static final String RANDOM_KEY = "RandomKey";
 	//private static final String DOC_ID = "DocID";
 	//private static final String ID = "_id";
 	
-	public AEMongoCollection(MongoCollection<Document> collection, MongoCollection<Document> fieldCollection) throws NoSuchAlgorithmException, NoSuchPaddingException {
+	public AEMongoCollection(MongoCollection<Document> collection, MongoCollection<Document> fieldCollection) throws Exception {
 		this.collection = collection;
 		this.fieldCollection = fieldCollection;
 		this.encryption = new Encryption();
@@ -52,6 +54,13 @@ public class AEMongoCollection {
 		this.randomPassEncryption = new RandomPassEncryption();
 		//this.encoder = new BCryptPasswordEncoder();
 		this.cipher = Cipher.getInstance(ALGORITHM);
+		this.key = generateKey();
+	}
+	
+	public static Key generateKey() throws Exception {
+		String keyValue = RandomStringUtils.random(32);
+		byte[] aesKey = keyValue.getBytes();
+		return new SecretKeySpec(aesKey, ALGORITHM);
 	}
 
 	/*Insert the encrypted field in the dedicated collection,
@@ -168,12 +177,7 @@ public class AEMongoCollection {
 		}    
 		return document;
 	}
-	
-	
-	/*-----------------------------------------------------------------------------------------*/
-	
-	
-	
+		
 	public void encryptDocumentRandomPass(Document document, String pathD, String docKey, EncryptionResult res) throws Exception {
 		String fieldName;
 		String path;
@@ -211,10 +215,7 @@ public class AEMongoCollection {
 		}
 		res.setDocument(document);
 		res.setKey(docKey);
-	}
-	
-	/*-----------------------------------------------------------------------------------------*/
-	
+	}	
 	
 	/*Place "SECRET VALUE" at all the encrypted fields of a Document*/
 	public Document decryptDocument(Document document, String pathD) {
@@ -269,7 +270,7 @@ public class AEMongoCollection {
 			else if (doc.get(ENCODING_TYPE).equals(RANDOM)) {
 				//String encoded = randomPassEncryption.randomPassEncryptBCRYPT(value, encoder);
 				//field.setValue(encoded);
-				Encoding encoding = randomPassEncryption.randomPassEncryptAES(value, cipher);
+				Encoding encoding = randomPassEncryption.randomPassEncryptAES(value, cipher, key);
 				field.setValue(encoding.getEncoded());
 			}
 				
@@ -287,7 +288,7 @@ public class AEMongoCollection {
 			else if (encFields.get(path).equals(RANDOM)) {
 				//String encoded = randomPassEncryption.randomPassEncryptBCRYPT(value, encoder);
 				//field.setValue(encoded);
-				Encoding encoding = randomPassEncryption.randomPassEncryptAES(value, cipher);
+				Encoding encoding = randomPassEncryption.randomPassEncryptAES(value, cipher, key);
 				field.setValue(encoding.getEncoded());
 			}
 		}

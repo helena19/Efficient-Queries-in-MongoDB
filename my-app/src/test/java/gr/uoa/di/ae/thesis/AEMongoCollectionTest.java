@@ -2,11 +2,8 @@ package gr.uoa.di.ae.thesis;
 
 import static org.junit.Assert.assertEquals;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.List;
-
-import javax.crypto.NoSuchPaddingException;
 
 import org.bson.Document;
 import org.junit.Before;
@@ -27,7 +24,7 @@ public class AEMongoCollectionTest {
 	MongoCollection<Document> key_collection;
 	
 	@Before
-	public void init() throws NoSuchAlgorithmException, NoSuchPaddingException {
+	public void init() throws Exception {
 		fongo = new Fongo("fongo db");
 		collection = fongo.getDatabase("db").getCollection("collection");
 		key_collection = fongo.getDatabase("db").getCollection("collection2");
