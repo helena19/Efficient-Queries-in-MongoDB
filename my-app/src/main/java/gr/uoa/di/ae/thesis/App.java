@@ -1,12 +1,12 @@
 package gr.uoa.di.ae.thesis;
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
+//import java.security.InvalidKeyException;
+//import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
-import javax.crypto.NoSuchPaddingException;
+//import javax.crypto.NoSuchPaddingException;
 
 import org.bson.Document;
 import org.fluttercode.datafactory.impl.DataFactory;
@@ -20,7 +20,7 @@ import com.mongodb.client.MongoDatabase;
 
 public class App
 {	
-    public static void main( String[] args ) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException
+    public static void main( String[] args ) throws Exception
     {
         
         MongoCredential credential = MongoCredential.createCredential("admin", "thesisdi", "asdf-1234!".toCharArray());

@@ -2,10 +2,11 @@ package gr.uoa.di.ae.thesis;
 
 import static org.junit.Assert.assertEquals;
 
-
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.crypto.NoSuchPaddingException;
 
 import org.bson.Document;
 import org.junit.Before;
@@ -26,7 +27,7 @@ public class AEMongoCollectionTest {
 	MongoCollection<Document> key_collection;
 	
 	@Before
-	public void init() {
+	public void init() throws NoSuchAlgorithmException, NoSuchPaddingException {
 		fongo = new Fongo("fongo db");
 		collection = fongo.getDatabase("db").getCollection("collection");
 		key_collection = fongo.getDatabase("db").getCollection("collection2");
@@ -41,7 +42,7 @@ public class AEMongoCollectionTest {
 	}
 	
 	@Test
-	public void shouldAllowForInsertingDocuments() {
+	public void shouldAllowForInsertingDocuments() throws Exception {
 		
 		Document document = new Document("name", "Michael").append("e-mail", "mike@bulls.com");
 		
@@ -52,7 +53,7 @@ public class AEMongoCollectionTest {
 	
 	
 	@Test
-	public void shouldAllowForInsertingMultipleDocuments() {
+	public void shouldAllowForInsertingMultipleDocuments() throws Exception {
 		
 		Document mike = new Document("name", "Michael").append("e-mail", "mike@bulls.com");
 		Document scottie = new Document("name", "Scottie").append("e-mail", "scottie@bulls.com");
@@ -66,7 +67,7 @@ public class AEMongoCollectionTest {
 	}
 	
 	@Test
-	public void shouldStoreHashEncryptedFieldsUsingSHA256Hash() {
+	public void shouldStoreHashEncryptedFieldsUsingSHA256Hash() throws Exception {
 		aeMongoCollection.setEncryptedField("e-mail", EncryptionType.HASH);
 		Document document = new Document("name", "Michael").append("e-mail", "mike@bulls.com");
 		aeMongoCollection.insertOne(document);
@@ -80,7 +81,7 @@ public class AEMongoCollectionTest {
 	}
 	
 	@Test
-	public void shouldStoreHashEncryptedEmbeddedFieldsUsingSHA256Hash() {
+	public void shouldStoreHashEncryptedEmbeddedFieldsUsingSHA256Hash() throws Exception {
 		aeMongoCollection.setEncryptedField("name.last", EncryptionType.HASH);
 		aeMongoCollection.setEncryptedField("salary", EncryptionType.HASH);
 		aeMongoCollection.setEncryptedField("name.surname.middle", EncryptionType.HASH);
