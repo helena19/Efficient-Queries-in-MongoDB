@@ -45,7 +45,7 @@ public class App
         /*New 100 Entries*/
         long startTime2 = System.nanoTime();
 		DataFactory df = new DataFactory();
-        for (int i = 0; i < 10; i++) {          
+        for (int i = 0; i < 100; i++) {          
             Document doc = new Document("name",df.getFirstName()).append("surname", df.getLastName()).append("e-mail",df.getEmailAddress()).append("date",df.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             myCollection.insertOne(doc);
             //collection.insertOne(doc); //Mongodb's driver

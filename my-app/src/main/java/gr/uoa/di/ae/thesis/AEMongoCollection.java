@@ -83,6 +83,14 @@ public class AEMongoCollection {
 		collection.insertOne(doc);
 	}
 	
+	/*Encrypt the document with random pass and keep doc id with its random pass*/
+	public void insertOneRandomPass(Document document) throws Exception {
+		String key = "";
+		EncryptionResult result = new EncryptionResult();
+		encryptDocumentRandomPass(document, "", key, result);
+		collection.insertOne(result.getDocument());
+	}
+	
 	/*Find the Documents that match the Document given*/
 	public List<Document> find(Document document) throws Exception {
 		FindIterable<Document> doc = collection.find(encryptDocument(document,""));
@@ -164,13 +172,7 @@ public class AEMongoCollection {
 	
 	/*-----------------------------------------------------------------------------------------*/
 	
-	/*Encrypt the document with random pass and keep doc id with its random pass*/
-	public void insertOneRandomPass(Document document) throws Exception {
-		String key = "";
-		EncryptionResult result = new EncryptionResult();
-		encryptDocumentRandomPass(document, "", key, result);
-		collection.insertOne(result.getDocument());
-	}
+	
 	
 	public void encryptDocumentRandomPass(Document document, String pathD, String docKey, EncryptionResult res) throws Exception {
 		String fieldName;
@@ -265,9 +267,9 @@ public class AEMongoCollection {
 				field.setValue(encoded);
 			}
 			else if (doc.get(ENCODING_TYPE).equals(RANDOM)) {
-				//String encoded = randomPassEncryption.randomPassEncrypt2(value, cipher);
+				//String encoded = randomPassEncryption.randomPassEncryptBCRYPT(value, encoder);
 				//field.setValue(encoded);
-				Encoding encoding = randomPassEncryption.randomPassEncrypt2(value, cipher);
+				Encoding encoding = randomPassEncryption.randomPassEncryptAES(value, cipher);
 				field.setValue(encoding.getEncoded());
 			}
 				
@@ -283,9 +285,9 @@ public class AEMongoCollection {
 				field.setValue(encoded);
 			}
 			else if (encFields.get(path).equals(RANDOM)) {
-				//String encoded = randomPassEncryption.randomPassEncrypt2(value, cipher);
+				//String encoded = randomPassEncryption.randomPassEncryptBCRYPT(value, encoder);
 				//field.setValue(encoded);
-				Encoding encoding = randomPassEncryption.randomPassEncrypt2(value, cipher);
+				Encoding encoding = randomPassEncryption.randomPassEncryptAES(value, cipher);
 				field.setValue(encoding.getEncoded());
 			}
 		}

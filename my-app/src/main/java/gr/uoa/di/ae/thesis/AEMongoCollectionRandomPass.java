@@ -121,7 +121,7 @@ public class AEMongoCollectionRandomPass {
 	public void encryptFieldRandomPass(String path, String valueToEncrypt, Entry<String, Object> field) {
 		if (encryptedFields.containsKey(path)) {
 			if (encryptedFields.get(path).equals(RANDOM)) {
-				String encoded = encryption.randomPassEncrypt1(valueToEncrypt, encoder);
+				String encoded = encryption.randomPassEncryptBCRYPT(valueToEncrypt, encoder);
 				field.setValue(encoded);
 			}
 		}
@@ -131,7 +131,7 @@ public class AEMongoCollectionRandomPass {
 	//	if (encryptedFields.containsKey(path)) {
 	//if (encryptedFields.get(path).equals(RANDOM)) {
 	//			byte[] value = valueToEncrypt.getBytes();
-	//			Encoding password = encryption.randomPassEncrypt2(value, cipher);
+	//			Encoding password = encryption.randomPassEncryptAES(value, cipher);
 	//			key = password.getKey().toString();
 	//			field.setValue(password.getEncoded());
 	//		}
