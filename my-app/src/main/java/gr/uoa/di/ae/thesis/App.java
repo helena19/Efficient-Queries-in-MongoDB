@@ -34,7 +34,8 @@ public class App
         AEMongoCollection myCollection = new AEMongoCollection(collection,fieldCollection);
         
         /*Set the encrypted fields if they aren't already set*/
-        myCollection.setEncryptedField("e-mail", EncryptionType.RANDOM);
+        EncryptionType encryption = EncryptionType.RANDOM;
+        myCollection.setEncryptedField("e-mail", encryption);
                        
         collection.drop();//delete the collection        
         System.out.println("Now,The collection has " + collection.count() + " items");
@@ -47,7 +48,7 @@ public class App
 		DataFactory df = new DataFactory();
         for (int i = 0; i < 100; i++) {          
             Document doc = new Document("name",df.getFirstName()).append("surname", df.getLastName()).append("e-mail",df.getEmailAddress()).append("date",df.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
-            myCollection.insertOne(doc);
+            myCollection.insertOne(doc, encryption);
             //collection.insertOne(doc); //Mongodb's driver
         }
         long endTime2 = System.nanoTime();

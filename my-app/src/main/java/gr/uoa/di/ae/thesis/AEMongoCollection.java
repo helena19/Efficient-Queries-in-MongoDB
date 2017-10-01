@@ -86,8 +86,17 @@ public class AEMongoCollection {
 		});
 	}
 
+	public void insertOne(Document document, EncryptionType enc) throws Exception {
+		if (enc == EncryptionType.HASH) {
+			insertOneHash(document);
+		}
+		else if (enc == EncryptionType.RANDOM) {
+			insertOneRandomPass(document);
+		}
+	}
+	
 	/*Insert a Document*/
-	public void insertOne(Document document) throws Exception {
+	public void insertOneHash(Document document) throws Exception {
 		Document doc = encryptDocument(document,"");
 		collection.insertOne(doc);
 	}
