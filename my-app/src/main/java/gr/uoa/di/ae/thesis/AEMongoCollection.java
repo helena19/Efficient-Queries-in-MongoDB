@@ -16,6 +16,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.bson.Document;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
@@ -30,7 +31,7 @@ public class AEMongoCollection {
 	private Encryption encryption;
 	
 	private RandomPassEncryption randomPassEncryption;
-	//private BCryptPasswordEncoder encoder;
+	private BCryptPasswordEncoder encoder;
 	
 	private Map<String,String> encFields;
 	
@@ -54,14 +55,15 @@ public class AEMongoCollection {
 		this.encryption = new Encryption();
 		this.encFields = new HashMap<String,String>();
 		this.randomPassEncryption = new RandomPassEncryption();
-		//this.encoder = new BCryptPasswordEncoder();
-		this.cipher = Cipher.getInstance(ALGORITHM);
-		this.key = generateKey();
+		this.encoder = new BCryptPasswordEncoder();
+		//this.cipher = Cipher.getInstance(ALGORITHM);
+		//this.key = generateKey();
 	}
 	
 	public static Key generateKey() throws Exception {
 		String keyValue = RandomStringUtils.random(32);
 		byte[] aesKey = keyValue.getBytes();
+		System.out.println("The key length is " + keyValue.length());
 		return new SecretKeySpec(aesKey, ALGORITHM);
 	}
 
@@ -366,10 +368,10 @@ public class AEMongoCollection {
 				field.setValue(encoded);
 			}
 			else if (doc.get(ENCODING_TYPE).equals(RANDOM)) {
-				//String encoded = randomPassEncryption.randomPassEncryptBCRYPT(value, encoder);
-				//field.setValue(encoded);
-				Encoding encoding = randomPassEncryption.randomPassEncryptAES(value, cipher, key);
-				field.setValue(encoding.getEncoded());
+				String encoded = randomPassEncryption.randomPassEncryptBCRYPT(value, encoder);
+				field.setValue(encoded);
+				//Encoding encoding = randomPassEncryption.randomPassEncryptAES(value, cipher, key);
+				//field.setValue(encoding.getEncoded());
 			}
 				
 		}
