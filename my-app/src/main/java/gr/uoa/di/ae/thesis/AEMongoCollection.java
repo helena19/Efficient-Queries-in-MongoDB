@@ -4,9 +4,11 @@ import java.security.Key;
 //import java.security.InvalidKeyException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -88,6 +90,7 @@ public class AEMongoCollection {
 
 	public void insertOne(Document document, EncryptionType enc) throws Exception {
 		if (enc == EncryptionType.HASH) {
+			System.out.println("bika edw");
 			insertOneHash(document);
 		}
 		else if (enc == EncryptionType.RANDOM) {
@@ -123,6 +126,92 @@ public class AEMongoCollection {
 			);
 			return set;
 		}	
+	}
+	
+	public List<Document> find2(Document document){
+		HashMap<String,Object> fields=new HashMap<String,Object>();
+		Document temp = new Document();
+		parseDocument(document,temp,fields,"");
+		FindIterable<Document> doc = collection.find(temp);
+		if (doc == null)
+			return null;
+		else {
+			List<Document> set=new ArrayList<Document>();
+			if(fields.isEmpty())
+			{
+				doc.forEach((Block <Document>) document2 -> 
+				{ 
+					set.add(decryptDocument(document2,""));
+				}
+				);
+				return set;
+			}
+			else {
+				doc.forEach((Block <Document>) document2 ->{ 
+					match(document2,fields,set);
+				}
+				);
+				return set;
+			}
+		}	
+	}
+	
+	public void parseDocument(Document document,Document ret,HashMap<String,Object> fields,String pathD) {
+		String fieldName;
+		String path;
+		Object fieldValue;
+		for (Entry<String, Object> field: document.entrySet()) {
+			fieldName = field.getKey();
+			path = "";
+			if (!pathD.equals(""))
+				path = pathD + "." + fieldName;
+			else
+				path += fieldName;
+			fieldValue = field.getValue();
+			if (fieldValue instanceof Document) {
+				Document tempDoc = (Document) fieldValue;
+				parseDocument(tempDoc,ret,fields,pathD);
+			}
+			else
+			{
+				if (encFields.containsKey(path)) {
+					fields.put(path,fieldValue);
+				}
+				else
+					ret.append(path,fieldValue);
+			}
+		}
+	}
+	
+	public void match(Document document,HashMap<String,Object> fields,List<Document> returnset) {
+		 Set<Entry<String, Object>> set = fields.entrySet();
+	     Iterator<Entry<String, Object>> iterator = set.iterator();
+	     while(iterator.hasNext()) 
+	     {
+	         HashMap.Entry mentry = (HashMap.Entry)iterator.next();
+	         System.out.print("key is: "+ mentry.getKey() + " & Value is: ");
+	         System.out.println(mentry.getValue());
+	         Object value=document.get(mentry.getKey());
+	         if(value instanceof String)
+	         {
+	        	 String toCompare=(String) value;
+	        	 System.out.println("Sugkrinw "+toCompare+" me "+ (String )mentry.getValue());
+	        	// if(!toCompare.matches((String) mentry.getValue()))
+	        		//return;	 
+	         }
+	         else if(value instanceof Float)
+	         { 
+	        	 Float toCompare=(Float) value;
+	        	 System.out.println("Sugkrinw "+toCompare+" me "+ (Float )mentry.getValue());
+	        	// if(!toCompare.)
+	         }
+	         else if(value instanceof Integer)
+	         { 
+	        	 Integer toCompare=(Integer) value;
+	        	 System.out.println("Sugkrinw "+toCompare+" me "+ (Integer )mentry.getValue());
+	        	 //if(!toCompare.)
+	         }
+	      }
 	}
 	
 	/*Find and return all the Documents */

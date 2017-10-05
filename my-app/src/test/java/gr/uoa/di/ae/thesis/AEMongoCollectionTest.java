@@ -43,7 +43,7 @@ public class AEMongoCollectionTest {
 		
 		Document document = new Document("name", "Michael").append("e-mail", "mike@bulls.com");
 		
-		aeMongoCollection.insertOne(document);
+		aeMongoCollection.insertOne(document,EncryptionType.HASH);
 		List<Document> result = aeMongoCollection.find(document);
 		assertEquals(document, result.get(0));
 	}
@@ -67,7 +67,23 @@ public class AEMongoCollectionTest {
 	public void shouldStoreHashEncryptedFieldsUsingSHA256Hash() throws Exception {
 		aeMongoCollection.setEncryptedField("e-mail", EncryptionType.HASH);
 		Document document = new Document("name", "Michael").append("e-mail", "mike@bulls.com");
-		aeMongoCollection.insertOne(document);
+		aeMongoCollection.importEncryptedFields();
+		aeMongoCollection.insertOne(document,EncryptionType.HASH);
+		
+		FindIterable<Document> result = collection.find(new Document("name", "Michael"));
+		assertEquals("Michael", result.first().get("name"));
+		
+		List<Document> result2=aeMongoCollection.find(new Document("name", "Michael"));
+		assertEquals("SECRET VALUE", result2.get(0).get("e-mail"));
+		
+	}
+	
+	@Test
+	public void shouldStoreHashEncryptedFieldsUsingRandomPass() throws Exception {
+		aeMongoCollection.setEncryptedField("e-mail", EncryptionType.RANDOM);
+		Document document = new Document("name", "Michael").append("e-mail", "mike@bulls.com");
+		aeMongoCollection.importEncryptedFields();
+		aeMongoCollection.insertOne(document,EncryptionType.RANDOM);
 		
 		FindIterable<Document> result = collection.find(new Document("name", "Michael"));
 		assertEquals("Michael", result.first().get("name"));
@@ -77,13 +93,16 @@ public class AEMongoCollectionTest {
 		
 	}
 	
+	
 	@Test
 	public void shouldStoreHashEncryptedEmbeddedFieldsUsingSHA256Hash() throws Exception {
 		aeMongoCollection.setEncryptedField("name.last", EncryptionType.HASH);
 		aeMongoCollection.setEncryptedField("salary", EncryptionType.HASH);
 		aeMongoCollection.setEncryptedField("name.surname.middle", EncryptionType.HASH);
+		aeMongoCollection.importEncryptedFields();
+
 		Document document = new Document("name", new Document("first", "Michael").append("last", "Jordan")).append("e-mail", "mike@bulls.com").append("salary", 100);
-		aeMongoCollection.insertOne(document);
+		aeMongoCollection.insertOne(document,EncryptionType.HASH);
 		
 	
 		
@@ -99,7 +118,7 @@ public class AEMongoCollectionTest {
 		assertEquals("mike@bulls.com", result3.get(0).get("e-mail"));
 		
 		Document document2 = new Document("name", new Document("first", "Michael").append("surname", new Document("middle","Phelps").append("last","Jordan"))).append("e-mail", "mike@bulls.com");
-		aeMongoCollection.insertOne(document2);
+		aeMongoCollection.insertOne(document2,EncryptionType.HASH);
 		
 		List<Document> result4=aeMongoCollection.find(new Document("name.surname.middle", "Phelps"));
 		assertEquals("mike@bulls.com", result4.get(0).get("e-mail"));
