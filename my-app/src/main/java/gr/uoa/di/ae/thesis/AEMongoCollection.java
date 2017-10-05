@@ -386,10 +386,10 @@ public class AEMongoCollection {
 				field.setValue(encoded);
 			}
 			else if (encFields.get(path).equals(RANDOM)) {
-				//String encoded = randomPassEncryption.randomPassEncryptBCRYPT(value, encoder);
-				//field.setValue(encoded);
-				Encoding encoding = randomPassEncryption.randomPassEncryptAES(value, cipher, key);
-				field.setValue(encoding.getEncoded());
+				String encoded = randomPassEncryption.randomPassEncryptBCRYPT(value, encoder);
+				field.setValue(encoded);
+				//Encoding encoding = randomPassEncryption.randomPassEncryptAES(value, cipher, key);
+				//field.setValue(encoding.getEncoded());
 			}
 		}
 	}
