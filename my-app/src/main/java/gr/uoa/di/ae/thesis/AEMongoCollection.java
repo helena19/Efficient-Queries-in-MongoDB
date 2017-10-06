@@ -40,6 +40,7 @@ public class AEMongoCollection {
 	private static final String HASH = "hash";
 	private static final String RANDOM = "random";
 	private static final String SECRET_VALUE = "SECRET VALUE";
+	private static final String EMPTY_STRING="";
 	
 	private static final String ALGORITHM = "AES";
 	private Cipher cipher;
@@ -70,7 +71,7 @@ public class AEMongoCollection {
 	/*Insert the encrypted field in the dedicated collection,
 	 * if it doesn't exist already*/	
 	public void setEncryptedField(String field, EncryptionType enc) {
-		String encryption_type = "";
+		String encryption_type = EMPTY_STRING;
 		if (enc == EncryptionType.HASH)
 			encryption_type += HASH;
 		else if (enc == EncryptionType.RANDOM)
@@ -102,28 +103,28 @@ public class AEMongoCollection {
 	
 	/*Insert a Document*/
 	public void insertOneHash(Document document) throws Exception {
-		Document doc = encryptDocument(document,"");
+		Document doc = encryptDocument(document,EMPTY_STRING);
 		collection.insertOne(doc);
 	}
 	
 	/*Encrypt the document with random pass and keep doc id with its random pass*/
 	public void insertOneRandomPass(Document document) throws Exception {
-		String key = "";
+		String key = EMPTY_STRING;
 		EncryptionResult result = new EncryptionResult();
-		encryptDocumentRandomPass(document, "", key, result);
+		encryptDocumentRandomPass(document,EMPTY_STRING, key, result);
 		collection.insertOne(result.getDocument());
 	}
 	
 	/*Find the Documents that match the Document given*/
 	public List<Document> find(Document document) throws Exception {
-		FindIterable<Document> doc = collection.find(encryptDocument(document,""));
+		FindIterable<Document> doc = collection.find(encryptDocument(document,EMPTY_STRING));
 		if (doc == null)
 			return null;
 		else {
 			List<Document> set=new ArrayList<Document>();
 			doc.forEach((Block <Document>) document2 -> 
 			{ 
-				set.add(decryptDocument(document2,""));
+				set.add(decryptDocument(document2,EMPTY_STRING));
 			}
 			);
 			return set;
@@ -133,22 +134,23 @@ public class AEMongoCollection {
 	public List<Document> find2(Document document){
 		HashMap<String,Object> fields=new HashMap<String,Object>();
 		Document temp = new Document();
-		parseDocument(document,temp,fields,"");
-		FindIterable<Document> doc = collection.find(temp);
+		parseDocument(document,temp,fields,EMPTY_STRING); /*Find the encrypted values,construct the temp Document with non encrypted fields*/
+		FindIterable<Document> doc = collection.find(temp);/* This way we minimize the loops*/
 		if (doc == null)
 			return null;
 		else {
 			List<Document> set=new ArrayList<Document>();
-			if(fields.isEmpty())
+			if(fields.isEmpty()) /*The document given in the query has no encrypted fields*/
 			{
 				doc.forEach((Block <Document>) document2 -> 
 				{ 
-					set.add(decryptDocument(document2,""));
+					set.add(decryptDocument(document2,EMPTY_STRING));
 				}
 				);
 				return set;
 			}
-			else {
+			else { /*The document given in the query has encrypted fields*/
+				System.out.println("ta kwdikopoimena pedia einai "+fields);
 				doc.forEach((Block <Document>) document2 ->{ 
 					match(document2,fields,set);
 				}
@@ -158,14 +160,16 @@ public class AEMongoCollection {
 		}	
 	}
 	
+	/*Parse the Document and Return in the HashMap fields all the encrypted values <FieldName,FieldValue>
+	 * and in the ret parameter return The document constructed of the Fields which are not encrypted*/
 	public void parseDocument(Document document,Document ret,HashMap<String,Object> fields,String pathD) {
 		String fieldName;
 		String path;
 		Object fieldValue;
 		for (Entry<String, Object> field: document.entrySet()) {
 			fieldName = field.getKey();
-			path = "";
-			if (!pathD.equals(""))
+			path = EMPTY_STRING;
+			if (!pathD.equals(EMPTY_STRING))
 				path = pathD + "." + fieldName;
 			else
 				path += fieldName;
@@ -185,35 +189,77 @@ public class AEMongoCollection {
 		}
 	}
 	
-	public void match(Document document,HashMap<String,Object> fields,List<Document> returnset) {
+	public void match(Document document,HashMap<String,Object> fields,List<Document> returnSet) {
 		 Set<Entry<String, Object>> set = fields.entrySet();
 	     Iterator<Entry<String, Object>> iterator = set.iterator();
+	     HashMap<String,Object> flattenDocument=new HashMap<String,Object>();
+	     flattenDocument(document,flattenDocument,EMPTY_STRING);
+	     System.out.println("flatten Document "+flattenDocument);
 	     while(iterator.hasNext()) 
 	     {
 	         HashMap.Entry mentry = (HashMap.Entry)iterator.next();
 	         System.out.print("key is: "+ mentry.getKey() + " & Value is: ");
 	         System.out.println(mentry.getValue());
-	         Object value=document.get(mentry.getKey());
-	         if(value instanceof String)
+	         Object value=flattenDocument.get(mentry.getKey());
+	         if(value!=null)
 	         {
-	        	 String toCompare=(String) value;
-	        	 System.out.println("Sugkrinw "+toCompare+" me "+ (String )mentry.getValue());
-	        	// if(!toCompare.matches((String) mentry.getValue()))
-	        		//return;	 
+		         Object value2=mentry.getValue();
+		         System.out.println("value to "+value);
+		         if(value2 instanceof String)
+		         {
+		        	 String toCompare= objectToString(value);
+		        	 String toCompare2=objectToString(value2);
+		        	// System.out.println("Sugkrinw "+toCompare+" me "+ (String )mentry.getValue());
+		        	 if(!encoder.matches(toCompare2, toCompare))
+		        	 {
+		        		 System.out.println("den matcharoun ara mh apodekto");
+		        		 return;
+		        	 }
+		        	 
+		         }
+		         else if(value2 instanceof Float)
+		         { 
+		        	 String toCompare= objectToString(value);
+		        	 String toCompare2=objectToString(value2);
+		        	 System.out.println("Sugkrinw "+toCompare+" me "+ toCompare2);
+		        	 if(!encoder.matches(toCompare2, toCompare))
+		        	 {
+		        		 System.out.println("den matcharoun ara mh apodekto");
+		        		 return;
+		        	 }
+		         }
+		         else if(value2 instanceof Integer)
+		         { 
+		        	 String toCompare= objectToString(value);
+		        	 String toCompare2=objectToString(value2);
+		        	 System.out.println("Sugkrinw "+toCompare+" me "+ toCompare2);
+		        	 if(!encoder.matches(toCompare2,toCompare))
+		        	 {
+		        		 System.out.println("den matcharoun ara mh apodekto");
+		        		 return;
+		        	 }
+		         }
 	         }
-	         else if(value instanceof Float)
-	         { 
-	        	 Float toCompare=(Float) value;
-	        	 System.out.println("Sugkrinw "+toCompare+" me "+ (Float )mentry.getValue());
-	        	// if(!toCompare.)
-	         }
-	         else if(value instanceof Integer)
-	         { 
-	        	 Integer toCompare=(Integer) value;
-	        	 System.out.println("Sugkrinw "+toCompare+" me "+ (Integer )mentry.getValue());
-	        	 //if(!toCompare.)
-	         }
+	         else
+	        	 return;
 	      }
+	     returnSet.add(decryptDocument(document,EMPTY_STRING));
+	}
+	
+	/*Convert Object to String and return It*/
+	public String objectToString(Object object) {
+		if(object instanceof String)
+			return (String) object;
+		else if(object instanceof Integer)
+		{
+			Integer obj=(Integer) object;
+			return Integer.toString(obj);
+		}
+		else
+		{
+			Float obj=(Float) object;
+			return Float.toString(obj);
+		}
 	}
 	
 	/*Find and return all the Documents */
@@ -225,7 +271,7 @@ public class AEMongoCollection {
 			List<Document> set = new ArrayList<Document>();
 			doc.forEach((Block <Document>) document2 -> 
 			{ 
-				set.add(decryptDocument(document2,""));
+				set.add(decryptDocument(document2,EMPTY_STRING));
 			}
 			);
 			return set;
@@ -247,8 +293,8 @@ public class AEMongoCollection {
 		for (Entry<String, Object> field: document.entrySet()) 
 		{
 			fieldName = field.getKey();
-			path = "";
-			if (!pathD.equals(""))
+			path = EMPTY_STRING;
+			if (!pathD.equals(EMPTY_STRING))
 				path = pathD + "." + fieldName;
 			else
 				path = path + fieldName;
@@ -284,8 +330,8 @@ public class AEMongoCollection {
 		Object fieldValue;
 		for (Entry<String, Object> field: document.entrySet()) {
 			fieldName = field.getKey();
-			path = "";
-			if (!pathD.equals(""))
+			path = EMPTY_STRING;
+			if (!pathD.equals(EMPTY_STRING))
 				path = pathD + "." + fieldName;
 			else
 				path += fieldName;
@@ -323,8 +369,8 @@ public class AEMongoCollection {
 		String path;
 		for (Entry<String,Object> field: document.entrySet()) {
 			field_name = field.getKey();
-			path = "";
-			if (!pathD.equals(""))
+			path = EMPTY_STRING;
+			if (!pathD.equals(EMPTY_STRING))
 				path = pathD + "." + field_name;
 			else
 				path = path + field_name;
@@ -390,6 +436,30 @@ public class AEMongoCollection {
 				field.setValue(encoded);
 				//Encoding encoding = randomPassEncryption.randomPassEncryptAES(value, cipher, key);
 				//field.setValue(encoding.getEncoded());
+			}
+		}
+	}
+	
+	
+	/*Flatten the Document ,Return all the fields(embedded or not) in the HashMap fields*/
+	public void flattenDocument(Document document,HashMap<String,Object> fields,String pathD) 
+	{
+		String field_name;
+		String path;
+		for (Entry<String,Object> field: document.entrySet()) {
+			field_name = field.getKey();
+			path = EMPTY_STRING;
+			if (!pathD.equals(EMPTY_STRING))
+				path = pathD + "." + field_name;
+			else
+				path = path + field_name;
+			Object field_value = field.getValue();
+			if (field_value instanceof Document) {
+				Document tempDoc = (Document) field_value;
+				flattenDocument(tempDoc,fields,path);
+			}		
+			else{
+				fields.put(path,field_value);
 			}
 		}
 	}
