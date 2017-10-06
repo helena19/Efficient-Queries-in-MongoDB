@@ -155,7 +155,6 @@ public class AEMongoCollectionTest {
 		Document document = new Document("name", new Document("first", "Michael").append("last", "Jordan")).append("e-mail", "mike@bulls.com").append("salary", 100);
 		aeMongoCollection.insertOne(document,EncryptionType.RANDOM);
 		
-		
 		FindIterable<Document> result = collection.find(new Document("name.first", "Michael").append("e-mail", "mike@bulls.com"));
 		assertEquals("mike@bulls.com", result.first().get("e-mail"));
 		System.out.println(result.first());
