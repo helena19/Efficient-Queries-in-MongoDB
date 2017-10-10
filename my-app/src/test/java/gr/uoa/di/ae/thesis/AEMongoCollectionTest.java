@@ -186,4 +186,24 @@ public class AEMongoCollectionTest {
 		assertEquals("mike@bulls.com", res.first().get("e-mail"));
 	}
 	
+	@Test
+	public void shouldFindGreaterThanWithoutEncryption() {
+		Document document = new Document("name", new Document("first", "Michael").append("last", "Jordan")).append("year_of_birth", 1962);
+		collection.insertOne(document);
+		FindIterable<Document> res = collection.find(new Document("year_of_birth", new Document("$gt", 1960)));
+		System.out.println("1o document "+res.first());
+		assertEquals("Jordan", ((Document) res.first().get("name")).get("last"));
+	}
+	
+	@Test
+	public void shouldFindGreaterThanWithEncryption() {
+		aeMongoCollection.setEncryptedField("year_of_birth", EncryptionType.ORDER_PRESERVING);
+		aeMongoCollection.importEncryptedFields();
+		Document document = new Document("name", new Document("first", "Michael").append("last", "Jordan")).append("year_of_birth", 1962);
+		collection.insertOne(document);
+		FindIterable<Document> res = collection.find(new Document("year_of_birth", new Document("$gt", 1960)));
+		System.out.println("1o document "+res.first());
+		assertEquals("Jordan", ((Document) res.first().get("name")).get("last"));
+	}
+	
 }
