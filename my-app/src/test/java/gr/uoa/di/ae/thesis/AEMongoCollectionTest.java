@@ -5,7 +5,9 @@ import static org.junit.Assert.assertEquals;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bson.BSON;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -185,5 +187,7 @@ public class AEMongoCollectionTest {
 		System.out.println("1o document "+res.first());
 		assertEquals("mike@bulls.com", res.first().get("e-mail"));
 	}
+	
+	
 	
 }

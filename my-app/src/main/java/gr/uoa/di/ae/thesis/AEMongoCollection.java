@@ -93,7 +93,6 @@ public class AEMongoCollection {
 
 	public void insertOne(Document document, EncryptionType enc) throws Exception {
 		if (enc == EncryptionType.HASH) {
-			System.out.println("bika edw");
 			insertOneHash(document);
 		}
 		else if (enc == EncryptionType.RANDOM) {
