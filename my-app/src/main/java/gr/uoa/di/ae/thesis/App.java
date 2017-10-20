@@ -42,12 +42,87 @@ public class App
        
                        
         System.out.println("Now,The collection has " + collection.count() + " items");
+        List<Document> doc500=new ArrayList<Document>();
+        List<Document> doc1000=new ArrayList<Document>();
+        List<Document> doc2000=new ArrayList<Document>();
+        List<Document> doc4000=new ArrayList<Document>();
+        List<Document> doc8000=new ArrayList<Document>();
+        List<Document> doc16000=new ArrayList<Document>();
         List<Document> doc32000=new ArrayList<Document>();
         List<Document> doc40000=new ArrayList<Document>();
         List<Document> doc80000=new ArrayList<Document>();
         List<Document> doc160000=new ArrayList<Document>();
         DataFactory dff = new DataFactory();
-        for (int i = 0; i <32000; i++) {          
+        for (int i = 0; i <500; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc500.add(doc);
+            doc1000.add(doc);
+            doc2000.add(doc);
+            doc4000.add(doc);
+            doc8000.add(doc);
+            doc16000.add(doc);
+            doc32000.add(doc);
+            doc40000.add(doc);
+            doc80000.add(doc);
+            doc160000.add(doc);
+        }
+        System.out.println("Created 500 docs "+doc500.size());
+        for (int i = 0; i <500; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc1000.add(doc);
+            doc2000.add(doc);
+            doc4000.add(doc);
+            doc8000.add(doc);
+            doc16000.add(doc);
+            doc32000.add(doc);
+            doc40000.add(doc);
+            doc80000.add(doc);
+            doc160000.add(doc);
+        }
+        System.out.println("Created 1000 docs "+doc1000.size());
+        for (int i = 0; i <1000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc2000.add(doc);
+            doc4000.add(doc);
+            doc8000.add(doc);
+            doc16000.add(doc);
+            doc32000.add(doc);
+            doc40000.add(doc);
+            doc80000.add(doc);
+            doc160000.add(doc);
+        }
+        System.out.println("Created 2000 docs "+doc2000.size());
+        for (int i = 0; i <2000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc4000.add(doc);
+            doc8000.add(doc);
+            doc16000.add(doc);
+            doc32000.add(doc);
+            doc40000.add(doc);
+            doc80000.add(doc);
+            doc160000.add(doc);
+        }
+        System.out.println("Created 4000 docs "+doc4000.size());
+        for (int i = 0; i <4000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc8000.add(doc);
+            doc16000.add(doc);
+            doc32000.add(doc);
+            doc40000.add(doc);
+            doc80000.add(doc);
+            doc160000.add(doc);
+        }
+        System.out.println("Created 8000 docs "+doc8000.size());
+        for (int i = 0; i <8000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc16000.add(doc);
+            doc32000.add(doc);
+            doc40000.add(doc);
+            doc80000.add(doc);
+            doc160000.add(doc);
+        }
+        System.out.println("Created 16000 docs "+doc16000.size());
+        for (int i = 0; i <16000; i++) {          
             Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             doc32000.add(doc);
             doc40000.add(doc);
@@ -82,10 +157,29 @@ public class App
         writer3.println(doc80000);
         PrintWriter writer4 = new PrintWriter("160000Recs.txt", "UTF-8");
         writer4.println(doc160000);
+        PrintWriter writer5 = new PrintWriter("16000Recs.txt", "UTF-8");
+        writer5.println(doc16000);
+        PrintWriter writer6 = new PrintWriter("8000Recs.txt", "UTF-8");
+        writer6.println(doc8000);
+        PrintWriter writer7 = new PrintWriter("4000Recs.txt", "UTF-8");
+        writer7.println(doc4000);
+        PrintWriter writer8 = new PrintWriter("2000Recs.txt", "UTF-8");
+        writer8.println(doc2000);
+        PrintWriter writer9 = new PrintWriter("1000Recs.txt", "UTF-8");
+        writer9.println(doc1000);
+        PrintWriter writer10 = new PrintWriter("500Recs.txt", "UTF-8");
+        writer10.println(doc500);
         writer1.close();
         writer2.close();
         writer3.close();
         writer4.close();
+        writer5.close();
+        writer6.close();
+        writer7.close();
+        writer8.close();
+        writer9.close();
+        writer10.close();
+
 
 		PrintWriter writer = new PrintWriter("measures.txt", "UTF-8");
 
@@ -101,7 +195,7 @@ public class App
         Map<Integer,Float> shaMeasure=new HashMap<Integer,Float>();
         Map<Integer,Float> shafindMeasure=new HashMap<Integer,Float>();
 		int count=0;
-		while(count!=4)
+		while(count!=10)
 		{
 	        collection.drop();//delete the collection
 	        myCollection = new AEMongoCollection(collection,fieldCollection);
@@ -109,12 +203,24 @@ public class App
 	        myCollection.importEncryptedFields();
 			long startTime = System.nanoTime();
 			if(count==0)
-				myCollection.insertMany(doc32000, encryption);
+				myCollection.insertMany(doc500, encryption);
 			if(count==1)
-				myCollection.insertMany(doc40000, encryption);
+				myCollection.insertMany(doc1000, encryption);
 			if(count==2)
-				myCollection.insertMany(doc80000, encryption);
+				myCollection.insertMany(doc2000, encryption);
 			if(count==3)
+				myCollection.insertMany(doc4000, encryption);
+			if(count==4)
+				myCollection.insertMany(doc8000, encryption);
+			if(count==5)
+				myCollection.insertMany(doc16000, encryption);
+			if(count==6)
+				myCollection.insertMany(doc32000, encryption);
+			if(count==7)
+				myCollection.insertMany(doc40000, encryption);
+			if(count==8)
+				myCollection.insertMany(doc80000, encryption);
+			if(count==9)
 				myCollection.insertMany(doc160000, encryption);
 	        long endTime = System.nanoTime();
 	        long duration = (endTime - startTime);
@@ -196,47 +302,59 @@ public class App
 		/*--------------------------------------------------------------------------------------*/
 		
 		/*Mongo Insert Measures*/
-//        collection.drop();//delete the collection        
-//        fieldCollection.drop();//delete the Keys Collection
-//        /*Bring the Encrypted fields statically/topically*/
-//        Map<Integer,Float> mongoMeasure=new HashMap<Integer,Float>();
-//        Map<Integer,Float> mongofindMeasure=new HashMap<Integer,Float>();
-//		int count3=0;
-//		while(count3!=4)
-//		{
-//	        collection.drop();//delete the collection   
-//	        myCollection = new AEMongoCollection(collection,fieldCollection);
-//			long startTime = System.nanoTime();
-//			if(count3==0)
-//				collection.insertMany(doc32000);
-//			if(count3==1)
-//				collection.insertMany(doc40000);
-//			if(count3==2)
-//				collection.insertMany(doc80000);
-//			if(count3==3)
-//				collection.insertMany(doc160000);
-//	        long endTime = System.nanoTime();
-//	        long duration = (endTime - startTime);
-//	        System.out.println("Inserting all records with our way " + ((float)duration/1000000000)+" secs");
-//	        System.out.println("Now,The collection has " + collection.count() + " items");
-//	        mongoMeasure.put(count3, ((float)duration/1000000000));
-//		 	long findTime = System.nanoTime();  
-//	        Iterator<Document> cursor2 = collection.find().iterator();
-//	        while (cursor2.hasNext()) {
-//	            System.err.println(cursor2.next().toJson());
-//	        }
-//	        long endfindTime = System.nanoTime();
-//	        long durationfind = (endfindTime - findTime);
-//	        System.out.println("Finding all records with mongo's way"+((float)durationfind/1000000000)+" secs");
-//	        mongofindMeasure.put(count3, ((float)durationfind/1000000000));
-//	        count3++;
-//		}
-//		
-//		writer.println("Mongo");
-//		writer.println("Insert");
-//		writer.println(mongoMeasure);
-//		writer.println("Find");
-//		writer.println(mongofindMeasure);
+        collection.drop();//delete the collection        
+        fieldCollection.drop();//delete the Keys Collection
+        /*Bring the Encrypted fields statically/topically*/
+        Map<Integer,Float> mongoMeasure=new HashMap<Integer,Float>();
+        Map<Integer,Float> mongofindMeasure=new HashMap<Integer,Float>();
+		int count3=0;
+		while(count3!=10)
+		{
+	        collection.drop();//delete the collection   
+	        myCollection = new AEMongoCollection(collection,fieldCollection);
+			long startTime = System.nanoTime();
+			if(count3==0)
+				collection.insertMany(doc500);
+			else if(count3==1)
+				collection.insertMany(doc1000);
+			else if(count3==2)
+				collection.insertMany(doc2000);
+			else if(count3==3)
+				collection.insertMany(doc4000);
+			else if(count3==4)
+				collection.insertMany(doc8000);
+			else if(count3==5)
+				collection.insertMany(doc16000);
+			else if(count3==6)
+				collection.insertMany(doc32000);
+			else if(count3==7)
+				collection.insertMany(doc40000);
+			else if(count3==8)
+				collection.insertMany(doc80000);
+			else if(count3==9)
+				collection.insertMany(doc160000);
+	        long endTime = System.nanoTime();
+	        long duration = (endTime - startTime);
+	        System.out.println("Inserting all records with our way " + ((float)duration/1000000000)+" secs");
+	        System.out.println("Now,The collection has " + collection.count() + " items");
+	        mongoMeasure.put(count3, ((float)duration/1000000000));
+		 	long findTime = System.nanoTime();  
+	        Iterator<Document> cursor2 = collection.find().iterator();
+	        while (cursor2.hasNext()) {
+	            System.err.println(cursor2.next().toJson());
+	        }
+	        long endfindTime = System.nanoTime();
+	        long durationfind = (endfindTime - findTime);
+	        System.out.println("Finding all records with mongo's way"+((float)durationfind/1000000000)+" secs");
+	        mongofindMeasure.put(count3, ((float)durationfind/1000000000));
+	        count3++;
+		}
+		
+		writer.println("Mongo");
+		writer.println("Insert");
+		writer.println(mongoMeasure);
+		writer.println("Find");
+		writer.println(mongofindMeasure);
 
 
 		/*----------------------------------------------------------------------------------------*/
