@@ -57,7 +57,7 @@ public class AEMongoCollectionTest {
 		Document mike = new Document("name", "Michael").append("e-mail", "mike@bulls.com");
 		Document scottie = new Document("name", "Scottie").append("e-mail", "scottie@bulls.com");
 		
-		aeMongoCollection.insertMany((Arrays.asList(mike, scottie)));
+		aeMongoCollection.insertMany((Arrays.asList(mike, scottie)),EncryptionType.HASH);
 		List<Document> result = aeMongoCollection.find(mike);
 		assertEquals(mike, result.get(0));
 		result = aeMongoCollection.find(scottie);
@@ -91,8 +91,7 @@ public class AEMongoCollectionTest {
 		assertEquals("Michael", result.first().get("name"));
 		
 		List<Document> result2=aeMongoCollection.find2(new Document("e-mail", "mike@bulls.com").append("name", "Michael"));
-		assertEquals("Michael", result2.get(0).get("name"));
-		
+		assertEquals("Michael", result2.get(0).get("name"));	
 	}
 	
 	

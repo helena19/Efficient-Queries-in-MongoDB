@@ -109,9 +109,9 @@ public class AEMongoCollection {
 	/*Encrypt the document with random pass and keep doc id with its random pass*/
 	public void insertOneRandomPass(Document document) throws Exception {
 		String key = EMPTY_STRING;
-		EncryptionResult result = new EncryptionResult();
-		encryptDocumentRandomPass(document,EMPTY_STRING, key, result);
-		collection.insertOne(result.getDocument());
+		//EncryptionResult result = new EncryptionResult();
+//		encryptDocumentRandomPass(document,EMPTY_STRING, key/*, result*/);
+		collection.insertOne(encryptDocumentRandomPass(document,EMPTY_STRING, key/*, result*/));
 	}
 	
 	/*Find the Documents that match the Document given*/
@@ -278,10 +278,25 @@ public class AEMongoCollection {
 	}
 	
 	/*Insert Many Records*/
-	public void insertMany(List<Document> records) {
-		for (Document doc : records) {
-			collection.insertOne(doc);
+	public void insertMany(List<Document> records, EncryptionType enc) throws Exception {
+		List<Document> recs=new ArrayList<Document>();
+		if (enc == EncryptionType.HASH) 
+		{
+			for(Document doc:records) {
+				recs.add(encryptDocument(doc,""));
+			}
 		}
+		else {
+			System.out.println("eimai st random case ");
+			for(Document doc:records) {
+//				System.out.println("bika");
+				String key = EMPTY_STRING;
+			//	EncryptionResult result = new EncryptionResult();
+			//	encryptDocumentRandomPass(doc,EMPTY_STRING, key, result);	
+				recs.add(encryptDocumentRandomPass(doc,EMPTY_STRING, key/*, result*/));
+			}
+		}
+		collection.insertMany(recs);
 	}
 	
 	/*Encrypt a Document using the right type of encryption*/
@@ -323,7 +338,7 @@ public class AEMongoCollection {
 		return document;
 	}
 		
-	public void encryptDocumentRandomPass(Document document, String pathD, String docKey, EncryptionResult res) throws Exception {
+	public Document encryptDocumentRandomPass(Document document, String pathD, String docKey/*, EncryptionResult res*/) throws Exception {
 		String fieldName;
 		String path;
 		Object fieldValue;
@@ -337,29 +352,30 @@ public class AEMongoCollection {
 			fieldValue = field.getValue();
 			if (fieldValue instanceof Document) {
 				Document tempDoc = (Document) fieldValue;
-				encryptDocumentRandomPass(tempDoc, path, docKey, res);
+				encryptDocumentRandomPass(tempDoc, path, docKey/*, res*/);
 			}
 			else if (fieldValue instanceof String) {
 				String stringValue = (String) fieldValue;
 				encryptIfNeeded2(path, stringValue, field);
-				if (!stringValue.equals((String) field.getValue()))
-					docKey = (String) field.getValue();
+				//if (!stringValue.equals((String) field.getValue()))
+					//docKey = (String) field.getValue();
 			}
 			else if (fieldValue instanceof Integer) {
 				Integer integerValue = (Integer) fieldValue;
 				encryptIfNeeded2(path, integerValue.toString(), field);
-				if (!integerValue.equals(field.getValue()))
-					docKey = field.getValue().toString();
+			//	if (!integerValue.equals(field.getValue()))
+				//	docKey = field.getValue().toString();
 			}
 			else if (fieldValue instanceof Float) {
 				Float floatValue = (Float) fieldValue;
 				encryptIfNeeded2(path, floatValue.toString(), field);
-				if (!floatValue.equals(field.getValue()))
-					docKey = field.getValue().toString();
+				//if (!floatValue.equals(field.getValue()))
+					//docKey = field.getValue().toString();
 			}
 		}
-		res.setDocument(document);
-		res.setKey(docKey);
+	//	res.setDocument(document);
+	//	res.setKey(docKey);
+		return document;
 	}	
 	
 	/*Place "SECRET VALUE" at all the encrypted fields of a Document*/
