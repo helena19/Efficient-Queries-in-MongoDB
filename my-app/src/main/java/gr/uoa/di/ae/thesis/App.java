@@ -48,10 +48,28 @@ public class App
         List<Document> doc4000=new ArrayList<Document>();
         List<Document> doc8000=new ArrayList<Document>();
         List<Document> doc16000=new ArrayList<Document>();
-        List<Document> doc32000=new ArrayList<Document>();
+        List<Document> doc20000=new ArrayList<Document>();
+        List<Document> doc30000=new ArrayList<Document>();
         List<Document> doc40000=new ArrayList<Document>();
+        List<Document> doc50000=new ArrayList<Document>();
+        List<Document> doc60000=new ArrayList<Document>();
+        List<Document> doc70000=new ArrayList<Document>();
         List<Document> doc80000=new ArrayList<Document>();
+        List<Document> doc90000=new ArrayList<Document>();
+        List<Document> doc100000=new ArrayList<Document>();
+        List<Document> doc110000=new ArrayList<Document>();
+        List<Document> doc120000=new ArrayList<Document>();
+        List<Document> doc130000=new ArrayList<Document>();
+        List<Document> doc140000=new ArrayList<Document>();
+        List<Document> doc150000=new ArrayList<Document>();
         List<Document> doc160000=new ArrayList<Document>();
+        List<Document> doc170000=new ArrayList<Document>();
+        List<Document> doc180000=new ArrayList<Document>();
+        List<Document> doc190000=new ArrayList<Document>();
+        List<Document> doc200000=new ArrayList<Document>();
+        List<Document> doc250000=new ArrayList<Document>();
+        
+
         DataFactory dff = new DataFactory();
         for (int i = 0; i <500; i++) {          
             Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
@@ -61,12 +79,29 @@ public class App
             doc4000.add(doc);
             doc8000.add(doc);
             doc16000.add(doc);
-            doc32000.add(doc);
+            doc20000.add(doc);
+            doc30000.add(doc);
             doc40000.add(doc);
+            doc50000.add(doc);
+            doc60000.add(doc);
+            doc70000.add(doc);
             doc80000.add(doc);
+            doc90000.add(doc);
+            doc100000.add(doc);
+            doc110000.add(doc);
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
             doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
         }
         System.out.println("Created 500 docs "+doc500.size());
+        
         for (int i = 0; i <500; i++) {          
             Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             doc1000.add(doc);
@@ -74,69 +109,450 @@ public class App
             doc4000.add(doc);
             doc8000.add(doc);
             doc16000.add(doc);
-            doc32000.add(doc);
+            doc20000.add(doc);
+            doc30000.add(doc);
             doc40000.add(doc);
+            doc50000.add(doc);
+            doc60000.add(doc);
+            doc70000.add(doc);
             doc80000.add(doc);
+            doc90000.add(doc);
+            doc100000.add(doc);
+            doc110000.add(doc);
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
             doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
         }
         System.out.println("Created 1000 docs "+doc1000.size());
+        
         for (int i = 0; i <1000; i++) {          
             Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             doc2000.add(doc);
             doc4000.add(doc);
             doc8000.add(doc);
             doc16000.add(doc);
-            doc32000.add(doc);
+            doc20000.add(doc);
+            doc30000.add(doc);
             doc40000.add(doc);
+            doc50000.add(doc);
+            doc60000.add(doc);
+            doc70000.add(doc);
             doc80000.add(doc);
+            doc90000.add(doc);
+            doc100000.add(doc);
+            doc110000.add(doc);
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
             doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
         }
         System.out.println("Created 2000 docs "+doc2000.size());
+        
         for (int i = 0; i <2000; i++) {          
             Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             doc4000.add(doc);
             doc8000.add(doc);
             doc16000.add(doc);
-            doc32000.add(doc);
+            doc20000.add(doc);
+            doc30000.add(doc);
             doc40000.add(doc);
+            doc50000.add(doc);
+            doc60000.add(doc);
+            doc70000.add(doc);
             doc80000.add(doc);
+            doc90000.add(doc);
+            doc100000.add(doc);
+            doc110000.add(doc);
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
             doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
         }
         System.out.println("Created 4000 docs "+doc4000.size());
+        
         for (int i = 0; i <4000; i++) {          
             Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             doc8000.add(doc);
             doc16000.add(doc);
-            doc32000.add(doc);
+            doc20000.add(doc);
+            doc30000.add(doc);
             doc40000.add(doc);
+            doc50000.add(doc);
+            doc60000.add(doc);
+            doc70000.add(doc);
             doc80000.add(doc);
+            doc90000.add(doc);
+            doc100000.add(doc);
+            doc110000.add(doc);
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
             doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
         }
         System.out.println("Created 8000 docs "+doc8000.size());
+        
         for (int i = 0; i <8000; i++) {          
             Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             doc16000.add(doc);
-            doc32000.add(doc);
+            doc20000.add(doc);
+            doc30000.add(doc);
             doc40000.add(doc);
+            doc50000.add(doc);
+            doc60000.add(doc);
+            doc70000.add(doc);
             doc80000.add(doc);
+            doc90000.add(doc);
+            doc100000.add(doc);
+            doc110000.add(doc);
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
             doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
         }
         System.out.println("Created 16000 docs "+doc16000.size());
-        for (int i = 0; i <16000; i++) {          
+        
+        for (int i = 0; i <4000; i++) {          
             Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
-            doc32000.add(doc);
+            doc20000.add(doc);
+            doc30000.add(doc);
             doc40000.add(doc);
+            doc50000.add(doc);
+            doc60000.add(doc);
+            doc70000.add(doc);
             doc80000.add(doc);
+            doc90000.add(doc);
+            doc100000.add(doc);
+            doc110000.add(doc);
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
             doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
         }
-        System.out.println("Created 32000 docs "+doc32000.size());
-        for (int i = 0; i <8000; i++) {          
+        System.out.println("Created 20000 docs "+doc20000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc30000.add(doc);
+            doc40000.add(doc);
+            doc50000.add(doc);
+            doc60000.add(doc);
+            doc70000.add(doc);
+            doc80000.add(doc);
+            doc90000.add(doc);
+            doc100000.add(doc);
+            doc110000.add(doc);
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
+            doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
+        }
+        System.out.println("Created 30000 docs "+doc30000.size());
+        
+        for (int i = 0; i <10000; i++) {          
             Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             doc40000.add(doc);
+            doc50000.add(doc);
+            doc60000.add(doc);
+            doc70000.add(doc);
             doc80000.add(doc);
+            doc90000.add(doc);
+            doc100000.add(doc);
+            doc110000.add(doc);
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
             doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
         }
         System.out.println("Created 40000 docs "+doc40000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc50000.add(doc);
+            doc60000.add(doc);
+            doc70000.add(doc);
+            doc80000.add(doc);
+            doc90000.add(doc);
+            doc100000.add(doc);
+            doc110000.add(doc);
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
+            doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
+        }
+        System.out.println("Created 50000 docs "+doc50000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc60000.add(doc);
+            doc70000.add(doc);
+            doc80000.add(doc);
+            doc90000.add(doc);
+            doc100000.add(doc);
+            doc110000.add(doc);
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
+            doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
+        }
+        System.out.println("Created 60000 docs "+doc60000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc70000.add(doc);
+            doc80000.add(doc);
+            doc90000.add(doc);
+            doc100000.add(doc);
+            doc110000.add(doc);
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
+            doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
+        }
+        System.out.println("Created 70000 docs "+doc70000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc80000.add(doc);
+            doc90000.add(doc);
+            doc100000.add(doc);
+            doc110000.add(doc);
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
+            doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
+        }
+        System.out.println("Created 80000 docs "+doc80000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc90000.add(doc);
+            doc100000.add(doc);
+            doc110000.add(doc);
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
+            doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
+        }
+        System.out.println("Created 90000 docs "+doc90000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc100000.add(doc);
+            doc110000.add(doc);
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
+            doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
+        }
+        System.out.println("Created 100000 docs "+doc100000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc110000.add(doc);
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
+            doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
+        }
+        System.out.println("Created 110000 docs "+doc110000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc120000.add(doc);
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
+            doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
+        }
+        System.out.println("Created 120000 docs "+doc120000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc130000.add(doc);
+            doc140000.add(doc);
+            doc150000.add(doc);
+            doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
+        } 
+        System.out.println("Created 130000 docs "+doc130000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc140000.add(doc);
+            doc150000.add(doc);
+            doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
+        }
+        System.out.println("Created 140000 docs "+doc140000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc150000.add(doc);
+            doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
+        }
+        System.out.println("Created 150000 docs "+doc150000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc160000.add(doc);
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
+        }
+        System.out.println("Created 160000 docs "+doc160000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc170000.add(doc);
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
+        }
+        System.out.println("Created 170000 docs "+doc170000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc180000.add(doc);
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
+        }
+        System.out.println("Created 180000 docs "+doc180000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc190000.add(doc);
+            doc200000.add(doc);
+            doc250000.add(doc);
+        }
+        System.out.println("Created 190000 docs "+doc190000.size());
+        
+        for (int i = 0; i <10000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc200000.add(doc);
+            doc250000.add(doc);
+        }
+        System.out.println("Created 200000 docs "+doc200000.size());
+        
+        for (int i = 0; i <50000; i++) {          
+            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+            doc250000.add(doc);
+        }
+        System.out.println("Created 250000 docs "+doc250000.size());
+        
+        /*System.out.println("Created 40000 docs "+doc40000.size());
         for (int i = 0; i <40000; i++) {          
             Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             doc80000.add(doc);
@@ -148,8 +564,88 @@ public class App
            // Document doc = new Document("name",dff.getFirstName()).append("surname", dff.getLastName()).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime())); plain document
             doc160000.add(doc);
         }
-        System.out.println("Created 160000 docs "+doc160000.size());
-        PrintWriter writer1 = new PrintWriter("32000Recs.txt", "UTF-8");
+        System.out.println("Created 160000 docs "+doc160000.size());*/
+        PrintWriter writer1 = new PrintWriter("25000Recs.txt", "UTF-8");
+        writer1.println(doc250000);
+        PrintWriter writer2 = new PrintWriter("20000Recs.txt", "UTF-8");
+        writer2.println(doc200000);
+        PrintWriter writer3 = new PrintWriter("190000Recs.txt", "UTF-8");
+        writer3.println(doc190000);
+        PrintWriter writer4 = new PrintWriter("180000Recs.txt", "UTF-8");
+        writer4.println(doc180000);
+        PrintWriter writer5 = new PrintWriter("17000Recs.txt", "UTF-8");
+        writer5.println(doc170000);
+        PrintWriter writer6 = new PrintWriter("25000Recs.txt", "UTF-8");
+        writer6.println(doc160000);
+        PrintWriter writer7 = new PrintWriter("25000Recs.txt", "UTF-8");
+        writer7.println(doc150000);
+        PrintWriter writer8 = new PrintWriter("25000Recs.txt", "UTF-8");
+        writer8.println(doc140000);
+        PrintWriter writer9 = new PrintWriter("25000Recs.txt", "UTF-8");
+        writer9.println(doc130000);
+        PrintWriter writer10 = new PrintWriter("25000Recs.txt", "UTF-8");
+        writer10.println(doc120000);
+        PrintWriter writer11 = new PrintWriter("25000Recs.txt", "UTF-8");
+        writer11.println(doc110000);
+        PrintWriter writer12 = new PrintWriter("25000Recs.txt", "UTF-8");
+        writer12.println(doc100000);
+        PrintWriter writer13 = new PrintWriter("25000Recs.txt", "UTF-8");
+        writer13.println(doc90000);
+        PrintWriter writer14 = new PrintWriter("25000Recs.txt", "UTF-8");
+        writer14.println(doc80000);
+        PrintWriter writer15 = new PrintWriter("25000Recs.txt", "UTF-8");
+        writer15.println(doc70000);
+        PrintWriter writer16 = new PrintWriter("25000Recs.txt", "UTF-8");
+        writer16.println(doc60000);
+        PrintWriter writer17 = new PrintWriter("25000Recs.txt", "UTF-8");
+        writer17.println(doc50000);
+        PrintWriter writer18 = new PrintWriter("25000Recs.txt", "UTF-8");
+        writer18.println(doc40000);
+        PrintWriter writer19 = new PrintWriter("25000Recs.txt", "UTF-8");
+        writer19.println(doc30000);
+        PrintWriter writer20 = new PrintWriter("25000Recs.txt", "UTF-8");
+        writer20.println(doc20000);
+        PrintWriter writer21 = new PrintWriter("16000Recs.txt", "UTF-8");
+        writer21.println(doc16000);
+        PrintWriter writer22 = new PrintWriter("8000Recs.txt", "UTF-8");
+        writer22.println(doc8000);
+        PrintWriter writer23 = new PrintWriter("4000Recs.txt", "UTF-8");
+        writer23.println(doc4000);
+        PrintWriter writer24 = new PrintWriter("2000Recs.txt", "UTF-8");
+        writer24.println(doc2000);
+        PrintWriter writer25 = new PrintWriter("1000Recs.txt", "UTF-8");
+        writer25.println(doc1000);
+        PrintWriter writer26 = new PrintWriter("500Recs.txt", "UTF-8");
+        writer26.println(doc500);
+        
+        writer1.close();
+        writer2.close();
+        writer3.close();
+        writer4.close();
+        writer5.close();
+        writer6.close();
+        writer7.close();
+        writer8.close();
+        writer9.close();
+        writer10.close();
+        writer11.close();
+        writer12.close();
+        writer13.close();
+        writer14.close();
+        writer15.close();
+        writer16.close();
+        writer17.close();
+        writer18.close();
+        writer19.close();
+        writer20.close();
+        writer21.close();
+        writer22.close();
+        writer23.close();
+        writer24.close();
+        writer25.close();
+        writer26.close();
+
+        /*PrintWriter writer1 = new PrintWriter("32000Recs.txt", "UTF-8");
         writer1.println(doc32000);
         PrintWriter writer2 = new PrintWriter("40000Recs.txt", "UTF-8");
         writer2.println(doc40000);
@@ -178,7 +674,7 @@ public class App
         writer7.close();
         writer8.close();
         writer9.close();
-        writer10.close();
+        writer10.close();*/
 
 
 		PrintWriter writer = new PrintWriter("measures.txt", "UTF-8");
@@ -189,7 +685,7 @@ public class App
         /*SHA-256 Insert Measures*/
         /*Bring the Encrypted fields statically/topically*/
 		 /*Set the encrypted fields if they aren't already set*/
-        EncryptionType encryption = EncryptionType.HASH;
+       /*EncryptionType encryption = EncryptionType.HASH;
         myCollection.setEncryptedField("name.last", encryption);
         myCollection.importEncryptedFields();
         Map<Integer,Float> shaMeasure=new HashMap<Integer,Float>();
@@ -242,7 +738,7 @@ public class App
 		writer.println("Insert");
 		writer.println(shaMeasure);
 		writer.println("Find");
-		writer.println(shafindMeasure);
+		writer.println(shafindMeasure);*/
 
 		/*-----------------------------------------------------------------------------------*/
 		
@@ -308,7 +804,7 @@ public class App
         Map<Integer,Float> mongoMeasure=new HashMap<Integer,Float>();
         Map<Integer,Float> mongofindMeasure=new HashMap<Integer,Float>();
 		int count3=0;
-		while(count3!=10)
+		while(count3!=26)
 		{
 	        collection.drop();//delete the collection   
 	        myCollection = new AEMongoCollection(collection,fieldCollection);
@@ -326,13 +822,46 @@ public class App
 			else if(count3==5)
 				collection.insertMany(doc16000);
 			else if(count3==6)
-				collection.insertMany(doc32000);
+				collection.insertMany(doc20000);
 			else if(count3==7)
-				collection.insertMany(doc40000);
+				collection.insertMany(doc30000);
 			else if(count3==8)
-				collection.insertMany(doc80000);
+				collection.insertMany(doc40000);
 			else if(count3==9)
+				collection.insertMany(doc50000);
+			else if(count3==10)
+				collection.insertMany(doc60000);
+			else if(count3==11)
+				collection.insertMany(doc70000);
+			else if(count3==12)
+				collection.insertMany(doc80000);
+			else if(count3==13)
+				collection.insertMany(doc90000);
+			else if(count3==14)
+				collection.insertMany(doc100000);
+			else if(count3==15)
+				collection.insertMany(doc110000);
+			else if(count3==16)
+				collection.insertMany(doc120000);
+			else if(count3==17)
+				collection.insertMany(doc130000);
+			else if(count3==18)
+				collection.insertMany(doc140000);
+			else if(count3==19)
+				collection.insertMany(doc150000);
+			else if(count3==20)
 				collection.insertMany(doc160000);
+			else if(count3==21)
+				collection.insertMany(doc170000);
+			else if(count3==22)
+				collection.insertMany(doc180000);
+			else if(count3==23)
+				collection.insertMany(doc190000);
+			else if(count3==24)
+				collection.insertMany(doc200000);
+			else if(count3==25)
+				collection.insertMany(doc250000);
+			
 	        long endTime = System.nanoTime();
 	        long duration = (endTime - startTime);
 	        System.out.println("Inserting all records with our way " + ((float)duration/1000000000)+" secs");
