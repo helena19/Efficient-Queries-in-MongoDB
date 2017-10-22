@@ -150,7 +150,7 @@ public class App
           doc1800.add(doc);
       }
         for (int i = 0; i <500; i++) {          
-           // Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+//            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             Document doc = new Document("name",dff.getFirstName()).append("surname", dff.getLastName()).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));// //plain document
 
             doc500.add(doc);
@@ -276,7 +276,7 @@ public class App
         System.out.println("Created 4000 docs "+doc4000.size());
         
         for (int i = 0; i <4000; i++) {          
-         //   Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+//            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             Document doc = new Document("name",dff.getFirstName()).append("surname", dff.getLastName()).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime())); //plain document
 
         	doc8000.add(doc);
@@ -333,7 +333,7 @@ public class App
         System.out.println("Created 16000 docs "+doc16000.size());
         
         for (int i = 0; i <4000; i++) {          
-  //          Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+//            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             Document doc = new Document("name",dff.getFirstName()).append("surname", dff.getLastName()).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime())); //plain document
 
         	doc20000.add(doc);
@@ -435,7 +435,7 @@ public class App
         System.out.println("Created 50000 docs "+doc50000.size());
         
         for (int i = 0; i <10000; i++) {          
-            //Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+//            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             Document doc = new Document("name",dff.getFirstName()).append("surname", dff.getLastName()).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime())); //plain document
 
         	doc60000.add(doc);
@@ -458,7 +458,7 @@ public class App
         System.out.println("Created 60000 docs "+doc60000.size());
         
         for (int i = 0; i <10000; i++) {          
-///            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+//            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             Document doc = new Document("name",dff.getFirstName()).append("surname", dff.getLastName()).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime())); //plain document
 
         	doc70000.add(doc);
@@ -501,7 +501,7 @@ public class App
         System.out.println("Created 80000 docs "+doc80000.size());
         
         for (int i = 0; i <10000; i++) {          
-          //  Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+//            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             Document doc = new Document("name",dff.getFirstName()).append("surname", dff.getLastName()).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime())); //plain document
 
         	doc90000.add(doc);
@@ -558,7 +558,7 @@ public class App
         System.out.println("Created 110000 docs "+doc110000.size());
         
         for (int i = 0; i <10000; i++) {          
-          //  Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+//            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             Document doc = new Document("name",dff.getFirstName()).append("surname", dff.getLastName()).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime())); //plain document
 
         	doc120000.add(doc);
@@ -575,7 +575,7 @@ public class App
         System.out.println("Created 120000 docs "+doc120000.size());
         
         for (int i = 0; i <10000; i++) {          
-          //  Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+//            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             Document doc = new Document("name",dff.getFirstName()).append("surname", dff.getLastName()).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime())); //plain document
 
         	doc130000.add(doc);
@@ -591,7 +591,7 @@ public class App
         System.out.println("Created 130000 docs "+doc130000.size());
         
         for (int i = 0; i <10000; i++) {          
-          //  Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+//            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             Document doc = new Document("name",dff.getFirstName()).append("surname", dff.getLastName()).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime())); //plain document
 
         	doc140000.add(doc);
@@ -656,7 +656,7 @@ public class App
         System.out.println("Created 180000 docs "+doc180000.size());
         
         for (int i = 0; i <10000; i++) {          
-           // Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+//            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             Document doc = new Document("name",dff.getFirstName()).append("surname", dff.getLastName()).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime())); //plain document
 
         	doc190000.add(doc);
@@ -666,7 +666,7 @@ public class App
         System.out.println("Created 190000 docs "+doc190000.size());
         
         for (int i = 0; i <10000; i++) {          
-            //Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
+//            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
             Document doc = new Document("name",dff.getFirstName()).append("surname", dff.getLastName()).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime())); //plain document
 
         	doc200000.add(doc);
@@ -821,14 +821,44 @@ public class App
 //        Map<Integer,Float> shaMeasure=new HashMap<Integer,Float>();
 //        Map<Integer,Float> shafindMeasure=new HashMap<Integer,Float>();
 //		int count=0;
-//		while(count!=26)
+//		while(count!=15)//26 for big
 //		{
 //	        collection.drop();//delete the collection
 //	        myCollection = new AEMongoCollection(collection,fieldCollection);
 //	        System.out.println("After Drop,The collection has " + collection.count() + " items");
 //	        myCollection.importEncryptedFields();
 //			long startTime = System.nanoTime();
-//			if(count==0)
+//		if(count==0)
+//		myCollection.insertMany(doc10, encryption);
+//	else if(count==1)
+//		myCollection.insertMany(doc20, encryption);
+//	else if(count==2)
+//		myCollection.insertMany(doc50, encryption);
+//	else if(count==3)
+//		myCollection.insertMany(doc100, encryption);
+//	else if(count==4)
+//		myCollection.insertMany(doc300, encryption);
+//	else if(count==5)
+//		myCollection.insertMany(doc500, encryption);
+//	else if(count==6)
+//		myCollection.insertMany(doc700, encryption);
+//	else if(count==7)
+//		myCollection.insertMany(doc900, encryption);
+//	else if(count==8)
+//		myCollection.insertMany(doc1000, encryption);
+//	else if(count==9)
+//		myCollection.insertMany(doc1200, encryption);
+//	else if(count==10)
+//		myCollection.insertMany(doc1400, encryption);
+//	else if(count==11)
+//		myCollection.insertMany(doc1600, encryption);
+//	else if(count==12)
+//		myCollection.insertMany(doc1800, encryption);
+//	else if(count==13)
+//		myCollection.insertMany(doc2000, encryption);
+//	else if(count==14)
+//		myCollection.insertMany(doc4000, encryption);
+//			/*if(count==0)
 //				myCollection.insertMany(doc500, encryption);
 //			else if(count==1)
 //				myCollection.insertMany(doc1000, encryption);
@@ -879,7 +909,7 @@ public class App
 //			else if(count==24)
 //				myCollection.insertMany(doc200000,encryption);
 //			else if(count==25)
-//				myCollection.insertMany(doc250000,encryption);
+//				myCollection.insertMany(doc250000,encryption);Big Measures*/
 //	        long endTime = System.nanoTime();
 //	        long duration = (endTime - startTime);
 //	        System.out.println("Inserting all records with our way " + ((float)duration/1000000000)+" secs");
@@ -906,169 +936,199 @@ public class App
 		
 		
 		/*Bcrypt Insert Measures*/
-        collection.drop();//delete the collection        
-        fieldCollection.drop();//delete the Keys Collection
-        EncryptionType encryption2 = EncryptionType.RANDOM;
-        myCollection.setEncryptedField("e-mail", encryption2);
-        /*Bring the Encrypted fields statically/topically*/
-        myCollection.importEncryptedFields();
-        Map<Integer,Float> bcryptMeasure=new HashMap<Integer,Float>();
-        Map<Integer,Float> bcryptfindMeasure=new HashMap<Integer,Float>();
-
-		int count2=0;
-		while(count2!=15)
-		{
-	        collection.drop();//delete the collection  
-	        myCollection = new AEMongoCollection(collection,fieldCollection);
-	        System.out.println("After Drop,The collection has " + collection.count() + " items");
-        	myCollection.importEncryptedFields();
-			long startTime = System.nanoTime();
-			if(count2==0)
-				myCollection.insertMany(doc10, encryption2);
-			else if(count2==1)
-				myCollection.insertMany(doc20, encryption2);
-			else if(count2==2)
-				myCollection.insertMany(doc50, encryption2);
-			else if(count2==3)
-				myCollection.insertMany(doc100, encryption2);
-			else if(count2==4)
-				myCollection.insertMany(doc300, encryption2);
-			else if(count2==5)
-				myCollection.insertMany(doc500, encryption2);
-			else if(count2==6)
-				myCollection.insertMany(doc700, encryption2);
-			else if(count2==7)
-				myCollection.insertMany(doc900, encryption2);
-			else if(count2==8)
-				myCollection.insertMany(doc1000, encryption2);
-			else if(count2==9)
-				myCollection.insertMany(doc1200, encryption2);
-			else if(count2==10)
-				myCollection.insertMany(doc1400, encryption2);
-			else if(count2==11)
-				myCollection.insertMany(doc1600, encryption2);
-			else if(count2==12)
-				myCollection.insertMany(doc1800, encryption2);
-			else if(count2==13)
-				myCollection.insertMany(doc2000, encryption2);
-			else if(count2==14)
-				myCollection.insertMany(doc4000, encryption2);
-			//myCollection.insertMany(doc100, encryption2);
-	        long endTime = System.nanoTime();
-	        long duration = (endTime - startTime);
-	        System.out.println("Inserting all records with our way " + ((float)duration/1000000000)+" secs");
-	        System.out.println("Now,The collection has " + collection.count() + " items");
-	        bcryptMeasure.put(count2, ((float)duration/1000000000));
-	        long findTime = System.nanoTime();  
-	       Iterator<Document> cursor2 = myCollection.find().iterator();
-	       while (cursor2.hasNext()) {
-	           System.err.println(cursor2.next().toJson());
-	       }
-	       long endfindTime = System.nanoTime();
-	       long durationfind = (endfindTime - findTime);
-	       System.out.println("Finding all records with our way ( \" decoding \") "+((float)durationfind/1000000000)+" secs");
-	       bcryptfindMeasure.put(count2, ((float)durationfind/1000000000));
-	       count2++;
-
-		}
-		
-		writer.println("BCRYPT");
-		writer.println("Insert");
-		writer.println(bcryptMeasure);
-		writer.println("Find");
-		writer.println(bcryptfindMeasure);
+//        collection.drop();//delete the collection        
+//        fieldCollection.drop();//delete the Keys Collection
+//        EncryptionType encryption2 = EncryptionType.RANDOM;
+//        myCollection.setEncryptedField("name.last", encryption2);
+//        /*Bring the Encrypted fields statically/topically*/
+//        myCollection.importEncryptedFields();
+//        Map<Integer,Float> bcryptMeasure=new HashMap<Integer,Float>();
+//        Map<Integer,Float> bcryptfindMeasure=new HashMap<Integer,Float>();
+//
+//		int count2=0;
+//		while(count2!=15)
+//		{
+//	        collection.drop();//delete the collection  
+//	        myCollection = new AEMongoCollection(collection,fieldCollection);
+//	        System.out.println("After Drop,The collection has " + collection.count() + " items");
+//        	myCollection.importEncryptedFields();
+//			long startTime = System.nanoTime();
+//			if(count2==0)
+//				myCollection.insertMany(doc10, encryption2);
+//			else if(count2==1)
+//				myCollection.insertMany(doc20, encryption2);
+//			else if(count2==2)
+//				myCollection.insertMany(doc50, encryption2);
+//			else if(count2==3)
+//				myCollection.insertMany(doc100, encryption2);
+//			else if(count2==4)
+//				myCollection.insertMany(doc300, encryption2);
+//			else if(count2==5)
+//				myCollection.insertMany(doc500, encryption2);
+//			else if(count2==6)
+//				myCollection.insertMany(doc700, encryption2);
+//			else if(count2==7)
+//				myCollection.insertMany(doc900, encryption2);
+//			else if(count2==8)
+//				myCollection.insertMany(doc1000, encryption2);
+//			else if(count2==9)
+//				myCollection.insertMany(doc1200, encryption2);
+//			else if(count2==10)
+//				myCollection.insertMany(doc1400, encryption2);
+//			else if(count2==11)
+//				myCollection.insertMany(doc1600, encryption2);
+//			else if(count2==12)
+//				myCollection.insertMany(doc1800, encryption2);
+//			else if(count2==13)
+//				myCollection.insertMany(doc2000, encryption2);
+//			else if(count2==14)
+//				myCollection.insertMany(doc4000, encryption2);
+//			//myCollection.insertMany(doc100, encryption2);
+//	        long endTime = System.nanoTime();
+//	        long duration = (endTime - startTime);
+//	        System.out.println("Inserting all records with our way " + ((float)duration/1000000000)+" secs");
+//	        System.out.println("Now,The collection has " + collection.count() + " items");
+//	        bcryptMeasure.put(count2, ((float)duration/1000000000));
+//	        long findTime = System.nanoTime();  
+//	       Iterator<Document> cursor2 = myCollection.find().iterator();
+//	       while (cursor2.hasNext()) {
+//	           System.err.println(cursor2.next().toJson());
+//	       }
+//	       long endfindTime = System.nanoTime();
+//	       long durationfind = (endfindTime - findTime);
+//	       System.out.println("Finding all records with our way ( \" decoding \") "+((float)durationfind/1000000000)+" secs");
+//	       bcryptfindMeasure.put(count2, ((float)durationfind/1000000000));
+//	       count2++;
+//
+//		}
+//		
+//		writer.println("BCRYPT");
+//		writer.println("Insert");
+//		writer.println(bcryptMeasure);
+//		writer.println("Find");
+//		writer.println(bcryptfindMeasure);
 
 
 		
 		/*--------------------------------------------------------------------------------------*/
 		
 		/*Mongo Insert Measures*/
-//        collection.drop();//delete the collection        
-//        fieldCollection.drop();//delete the Keys Collection
-//        /*Bring the Encrypted fields statically/topically*/
-//        Map<Integer,Float> mongoMeasure=new HashMap<Integer,Float>();
-//        Map<Integer,Float> mongofindMeasure=new HashMap<Integer,Float>();
-//		int count3=0;
-//		while(count3!=26)
-//		{
-//	        collection.drop();//delete the collection   
-//	        myCollection = new AEMongoCollection(collection,fieldCollection);
-//			long startTime = System.nanoTime();
-//			if(count3==0)
-//				collection.insertMany(doc500);
-//			else if(count3==1)
-//				collection.insertMany(doc1000);
-//			else if(count3==2)
-//				collection.insertMany(doc2000);
-//			else if(count3==3)
-//				collection.insertMany(doc4000);
-//			else if(count3==4)
-//				collection.insertMany(doc8000);
-//			else if(count3==5)
-//				collection.insertMany(doc16000);
-//			else if(count3==6)
-//				collection.insertMany(doc20000);
-//			else if(count3==7)
-//				collection.insertMany(doc30000);
-//			else if(count3==8)
-//				collection.insertMany(doc40000);
-//			else if(count3==9)
-//				collection.insertMany(doc50000);
-//			else if(count3==10)
-//				collection.insertMany(doc60000);
-//			else if(count3==11)
-//				collection.insertMany(doc70000);
-//			else if(count3==12)
-//				collection.insertMany(doc80000);
-//			else if(count3==13)
-//				collection.insertMany(doc90000);
-//			else if(count3==14)
-//				collection.insertMany(doc100000);
-//			else if(count3==15)
-//				collection.insertMany(doc110000);
-//			else if(count3==16)
-//				collection.insertMany(doc120000);
-//			else if(count3==17)
-//				collection.insertMany(doc130000);
-//			else if(count3==18)
-//				collection.insertMany(doc140000);
-//			else if(count3==19)
-//				collection.insertMany(doc150000);
-//			else if(count3==20)
-//				collection.insertMany(doc160000);
-//			else if(count3==21)
-//				collection.insertMany(doc170000);
-//			else if(count3==22)
-//				collection.insertMany(doc180000);
-//			else if(count3==23)
-//				collection.insertMany(doc190000);
-//			else if(count3==24)
-//				collection.insertMany(doc200000);
-//			else if(count3==25)
-//				collection.insertMany(doc250000);
-//			
-//	        long endTime = System.nanoTime();
-//	        long duration = (endTime - startTime);
-//	        System.out.println("Inserting all records with mongos " + ((float)duration/1000000000)+" secs");
-//	        System.out.println("Now,The collection has " + collection.count() + " items");
-//	        mongoMeasure.put(count3, ((float)duration/1000000000));
-//		 	long findTime = System.nanoTime();  
-//	        Iterator<Document> cursor2 = collection.find().iterator();
-//	        while (cursor2.hasNext()) {
-//	            System.err.println(cursor2.next().toJson());
-//	        }
-//	        long endfindTime = System.nanoTime();
-//	        long durationfind = (endfindTime - findTime);
-//	        System.out.println("Finding all records with mongo's way"+((float)durationfind/1000000000)+" secs");
-//	        mongofindMeasure.put(count3, ((float)durationfind/1000000000));
-//	        count3++;
-//		}
-//		
-//		writer.println("Mongo");
-//		writer.println("Insert");
-//		writer.println(mongoMeasure);
-//		writer.println("Find");
-//		writer.println(mongofindMeasure);
+        collection.drop();//delete the collection        
+        fieldCollection.drop();//delete the Keys Collection
+        /*Bring the Encrypted fields statically/topically*/
+        Map<Integer,Float> mongoMeasure=new HashMap<Integer,Float>();
+        Map<Integer,Float> mongofindMeasure=new HashMap<Integer,Float>();
+		int count3=0;
+		while(count3!=15)//26 for big measures
+		{
+	        collection.drop();//delete the collection   
+	        myCollection = new AEMongoCollection(collection,fieldCollection);
+			long startTime = System.nanoTime();
+			if(count3==0)
+			collection.insertMany(doc10);
+		else if(count3==1)
+			collection.insertMany(doc20);
+		else if(count3==2)
+			collection.insertMany(doc50);
+		else if(count3==3)
+			collection.insertMany(doc100);
+		else if(count3==4)
+			collection.insertMany(doc300);
+		else if(count3==5)
+			collection.insertMany(doc500);
+		else if(count3==6)
+			collection.insertMany(doc700);
+		else if(count3==7)
+			collection.insertMany(doc900);
+		else if(count3==8)
+			collection.insertMany(doc1000);
+		else if(count3==9)
+			collection.insertMany(doc1200);
+		else if(count3==10)
+			collection.insertMany(doc1400);
+		else if(count3==11)
+			collection.insertMany(doc1600);
+		else if(count3==12)
+			collection.insertMany(doc1800);
+		else if(count3==13)
+			collection.insertMany(doc2000);
+		else if(count3==14)
+			collection.insertMany(doc4000);
+		/*	if(count3==0)
+				collection.insertMany(doc500);
+			else if(count3==1)
+				collection.insertMany(doc1000);
+			else if(count3==2)
+				collection.insertMany(doc2000);
+			else if(count3==3)
+				collection.insertMany(doc4000);
+			else if(count3==4)
+				collection.insertMany(doc8000);
+			else if(count3==5)
+				collection.insertMany(doc16000);
+			else if(count3==6)
+				collection.insertMany(doc20000);
+			else if(count3==7)
+				collection.insertMany(doc30000);
+			else if(count3==8)
+				collection.insertMany(doc40000);
+			else if(count3==9)
+				collection.insertMany(doc50000);
+			else if(count3==10)
+				collection.insertMany(doc60000);
+			else if(count3==11)
+				collection.insertMany(doc70000);
+			else if(count3==12)
+				collection.insertMany(doc80000);
+			else if(count3==13)
+				collection.insertMany(doc90000);
+			else if(count3==14)
+				collection.insertMany(doc100000);
+			else if(count3==15)
+				collection.insertMany(doc110000);
+			else if(count3==16)
+				collection.insertMany(doc120000);
+			else if(count3==17)
+				collection.insertMany(doc130000);
+			else if(count3==18)
+				collection.insertMany(doc140000);
+			else if(count3==19)
+				collection.insertMany(doc150000);
+			else if(count3==20)
+				collection.insertMany(doc160000);
+			else if(count3==21)
+				collection.insertMany(doc170000);
+			else if(count3==22)
+				collection.insertMany(doc180000);
+			else if(count3==23)
+				collection.insertMany(doc190000);
+			else if(count3==24)
+				collection.insertMany(doc200000);
+			else if(count3==25)
+				collection.insertMany(doc250000);  BIG MEASURES*/
+			
+	        long endTime = System.nanoTime();
+	        long duration = (endTime - startTime);
+	        System.out.println("Inserting all records with mongos " + ((float)duration/1000000000)+" secs");
+	        System.out.println("Now,The collection has " + collection.count() + " items");
+	        mongoMeasure.put(count3, ((float)duration/1000000000));
+		 	long findTime = System.nanoTime();  
+	        Iterator<Document> cursor2 = collection.find().iterator();
+	        while (cursor2.hasNext()) {
+	            System.err.println(cursor2.next().toJson());
+	        }
+	        long endfindTime = System.nanoTime();
+	        long durationfind = (endfindTime - findTime);
+	        System.out.println("Finding all records with mongo's way"+((float)durationfind/1000000000)+" secs");
+	        mongofindMeasure.put(count3, ((float)durationfind/1000000000));
+	        count3++;
+		}
+		
+		writer.println("Mongo");
+		writer.println("Insert");
+		writer.println(mongoMeasure);
+		writer.println("Find");
+		writer.println(mongofindMeasure);
 
 
 		/*----------------------------------------------------------------------------------------*/
