@@ -41,7 +41,6 @@ public class App
         //fieldCollection.drop();//delete the Keys Collection
        
                        
-        System.out.println("Now,The collection has " + collection.count() + " items");
         List<Document> doc10=new ArrayList<Document>();
         List<Document> doc20=new ArrayList<Document>();
         List<Document> doc50=new ArrayList<Document>();
@@ -53,7 +52,6 @@ public class App
         List<Document> doc1400=new ArrayList<Document>();
         List<Document> doc1600=new ArrayList<Document>();
         List<Document> doc1800=new ArrayList<Document>();
-
         List<Document> doc500=new ArrayList<Document>();
         List<Document> doc1000=new ArrayList<Document>();
         List<Document> doc2000=new ArrayList<Document>();
@@ -682,20 +680,7 @@ public class App
         }
         System.out.println("Created 250000 docs "+doc250000.size());
         
-        /*System.out.println("Created 40000 docs "+doc40000.size());
-        for (int i = 0; i <40000; i++) {          
-            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
-            doc80000.add(doc);
-            doc160000.add(doc);
-        }
-        System.out.println("Created 80000 docs "+doc80000.size());
-        for (int i = 0; i <80000; i++) {  
-            Document doc = new Document("name",new Document("first",dff.getFirstName()).append("last",dff.getLastName())).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime()));
-           // Document doc = new Document("name",dff.getFirstName()).append("surname", dff.getLastName()).append("e-mail",dff.getEmailAddress()).append("date",dff.getDateBetween(new GregorianCalendar(1920, 1, 1).getTime(), new GregorianCalendar(2017, 12, 31).getTime())); //plain document
-            doc160000.add(doc);
-        }
-        System.out.println("Created 160000 docs "+doc160000.size());*/
-        PrintWriter writer1 = new PrintWriter("25000Recs.txt", "UTF-8");
+       /* PrintWriter writer1 = new PrintWriter("25000Recs.txt", "UTF-8");
         writer1.println(doc250000);
         PrintWriter writer2 = new PrintWriter("20000Recs.txt", "UTF-8");
         writer2.println(doc200000);
@@ -773,7 +758,7 @@ public class App
         writer23.close();
         writer24.close();
         writer25.close();
-        writer26.close();
+        writer26.close();*/
 
         /*PrintWriter writer1 = new PrintWriter("32000Recs.txt", "UTF-8");
         writer1.println(doc32000);
@@ -810,13 +795,11 @@ public class App
 		PrintWriter writer = new PrintWriter("measures.txt", "UTF-8");
 
         
-        
-        
         /*SHA-256 Insert Measures*/
-        /*Bring the Encrypted fields statically/topically*/
 		 /*Set the encrypted fields if they aren't already set*/
 //       EncryptionType encryption = EncryptionType.HASH;
 //        myCollection.setEncryptedField("e-mail", encryption);
+        /*Bring the Encrypted fields statically/topically*/
 //        myCollection.importEncryptedFields();
 //        Map<Integer,Float> shaMeasure=new HashMap<Integer,Float>();
 //        Map<Integer,Float> shafindMeasure=new HashMap<Integer,Float>();
@@ -936,77 +919,76 @@ public class App
 		
 		
 		/*Bcrypt Insert Measures*/
-//        collection.drop();//delete the collection        
-//        fieldCollection.drop();//delete the Keys Collection
-//        EncryptionType encryption2 = EncryptionType.RANDOM;
-//        myCollection.setEncryptedField("name.last", encryption2);
-//        /*Bring the Encrypted fields statically/topically*/
-//        myCollection.importEncryptedFields();
-//        Map<Integer,Float> bcryptMeasure=new HashMap<Integer,Float>();
-//        Map<Integer,Float> bcryptfindMeasure=new HashMap<Integer,Float>();
-//
-//		int count2=0;
-//		while(count2!=15)
-//		{
-//	        collection.drop();//delete the collection  
-//	        myCollection = new AEMongoCollection(collection,fieldCollection);
-//	        System.out.println("After Drop,The collection has " + collection.count() + " items");
-//        	myCollection.importEncryptedFields();
-//			long startTime = System.nanoTime();
-//			if(count2==0)
-//				myCollection.insertMany(doc10, encryption2);
-//			else if(count2==1)
-//				myCollection.insertMany(doc20, encryption2);
-//			else if(count2==2)
-//				myCollection.insertMany(doc50, encryption2);
-//			else if(count2==3)
-//				myCollection.insertMany(doc100, encryption2);
-//			else if(count2==4)
-//				myCollection.insertMany(doc300, encryption2);
-//			else if(count2==5)
-//				myCollection.insertMany(doc500, encryption2);
-//			else if(count2==6)
-//				myCollection.insertMany(doc700, encryption2);
-//			else if(count2==7)
-//				myCollection.insertMany(doc900, encryption2);
-//			else if(count2==8)
-//				myCollection.insertMany(doc1000, encryption2);
-//			else if(count2==9)
-//				myCollection.insertMany(doc1200, encryption2);
-//			else if(count2==10)
-//				myCollection.insertMany(doc1400, encryption2);
-//			else if(count2==11)
-//				myCollection.insertMany(doc1600, encryption2);
-//			else if(count2==12)
-//				myCollection.insertMany(doc1800, encryption2);
-//			else if(count2==13)
-//				myCollection.insertMany(doc2000, encryption2);
-//			else if(count2==14)
-//				myCollection.insertMany(doc4000, encryption2);
-//			//myCollection.insertMany(doc100, encryption2);
-//	        long endTime = System.nanoTime();
-//	        long duration = (endTime - startTime);
-//	        System.out.println("Inserting all records with our way " + ((float)duration/1000000000)+" secs");
-//	        System.out.println("Now,The collection has " + collection.count() + " items");
-//	        bcryptMeasure.put(count2, ((float)duration/1000000000));
-//	        long findTime = System.nanoTime();  
-//	       Iterator<Document> cursor2 = myCollection.find().iterator();
-//	       while (cursor2.hasNext()) {
-//	           System.err.println(cursor2.next().toJson());
-//	       }
-//	       long endfindTime = System.nanoTime();
-//	       long durationfind = (endfindTime - findTime);
-//	       System.out.println("Finding all records with our way ( \" decoding \") "+((float)durationfind/1000000000)+" secs");
-//	       bcryptfindMeasure.put(count2, ((float)durationfind/1000000000));
-//	       count2++;
-//
-//		}
-//		
-//		writer.println("BCRYPT");
-//		writer.println("Insert");
-//		writer.println(bcryptMeasure);
-//		writer.println("Find");
-//		writer.println(bcryptfindMeasure);
+/*        collection.drop();//delete the collection        
+        fieldCollection.drop();//delete the Keys Collection
+        EncryptionType encryption2 = EncryptionType.RANDOM;
+        myCollection.setEncryptedField("name.last", encryption2);
+        //Bring the Encrypted fields statically/topically
+        myCollection.importEncryptedFields();
+        Map<Integer,Float> bcryptMeasure=new HashMap<Integer,Float>();
+        Map<Integer,Float> bcryptfindMeasure=new HashMap<Integer,Float>();
+
+		int count2=0;
+		while(count2!=15)
+		{
+	        collection.drop();//delete the collection  
+	        myCollection = new AEMongoCollection(collection,fieldCollection);
+	        System.out.println("After Drop,The collection has " + collection.count() + " items");
+        	myCollection.importEncryptedFields();
+			long startTime = System.nanoTime();
+			if(count2==0)
+				myCollection.insertMany(doc10, encryption2);
+			else if(count2==1)
+				myCollection.insertMany(doc20, encryption2);
+			else if(count2==2)
+				myCollection.insertMany(doc50, encryption2);
+			else if(count2==3)
+				myCollection.insertMany(doc100, encryption2);
+			else if(count2==4)
+				myCollection.insertMany(doc300, encryption2);
+			else if(count2==5)
+				myCollection.insertMany(doc500, encryption2);
+			else if(count2==6)
+				myCollection.insertMany(doc700, encryption2);
+			else if(count2==7)
+				myCollection.insertMany(doc900, encryption2);
+			else if(count2==8)
+				myCollection.insertMany(doc1000, encryption2);
+			else if(count2==9)
+				myCollection.insertMany(doc1200, encryption2);
+			else if(count2==10)
+				myCollection.insertMany(doc1400, encryption2);
+			else if(count2==11)
+				myCollection.insertMany(doc1600, encryption2);
+			else if(count2==12)
+				myCollection.insertMany(doc1800, encryption2);
+			else if(count2==13)
+				myCollection.insertMany(doc2000, encryption2);
+			else if(count2==14)
+				myCollection.insertMany(doc4000, encryption2);
+	        long endTime = System.nanoTime();
+	        long duration = (endTime - startTime);
+	        System.out.println("Inserting all records with our way " + ((float)duration/1000000000)+" secs");
+	        System.out.println("Now,The collection has " + collection.count() + " items");
+	        bcryptMeasure.put(count2, ((float)duration/1000000000));
+	        long findTime = System.nanoTime();  
+	       Iterator<Document> cursor2 = myCollection.find().iterator();
+	       while (cursor2.hasNext()) {
+	           System.err.println(cursor2.next().toJson());
+	       }
+	       long endfindTime = System.nanoTime();
+	       long durationfind = (endfindTime - findTime);
+	       System.out.println("Finding all records with our way ( \" decoding \") "+((float)durationfind/1000000000)+" secs");
+	       bcryptfindMeasure.put(count2, ((float)durationfind/1000000000));
+	       count2++;
+
+		}
+		
+		writer.println("BCRYPT");
+		writer.println("Insert");
+		writer.println(bcryptMeasure);
+		writer.println("Find");
+		writer.println(bcryptfindMeasure); */
 
 
 		
@@ -1015,7 +997,6 @@ public class App
 		/*Mongo Insert Measures*/
         collection.drop();//delete the collection        
         fieldCollection.drop();//delete the Keys Collection
-        /*Bring the Encrypted fields statically/topically*/
         Map<Integer,Float> mongoMeasure=new HashMap<Integer,Float>();
         Map<Integer,Float> mongofindMeasure=new HashMap<Integer,Float>();
 		int count3=0;
@@ -1137,48 +1118,50 @@ public class App
         
         
         /*Print All The Documents of the Collection (Using Mongo's way)*/
-//        System.out.println("All the inserts");
-//        long startTime1 = System.nanoTime();
-//        MongoCursor<Document> cursor = collection.find().iterator();
-//        try {
-//            while (cursor.hasNext()) {
-//                System.out.println(cursor.next().toJson());
-//            }
-//        } finally {
-//            cursor.close();
-//        }
-//        long endTime1 = System.nanoTime();
-//        long duration1 = (endTime1 - startTime1);
-//        System.out.println("Finding all records mongo's way "+((float)duration1/1000000000)+" secs");
+       /* System.out.println("All the inserts");
+        long startTime1 = System.nanoTime();
+        MongoCursor<Document> cursor = collection.find().iterator();
+        try {
+            while (cursor.hasNext()) {
+                System.out.println(cursor.next().toJson());
+            }
+        } finally {
+            cursor.close();
+        }
+        long endTime1 = System.nanoTime();
+        long duration1 = (endTime1 - startTime1);
+        System.out.println("Finding all records mongo's way "+((float)duration1/1000000000)+" secs");*/
         
-//        
-//       MongoCursor<Document> cursor3 = fieldCollection.find().iterator();
-//        try {
-//            while (cursor3.hasNext()) {
-//                System.out.println("Encrypted field"+cursor3.next().toJson());
-//            }
-//        } finally {
-//            cursor3.close();
-//        }
+        
+		
+      /*Print The Fields Specified for Encryption
+       *  MongoCursor<Document> cursor3 = fieldCollection.find().iterator();
+        try {
+            while (cursor3.hasNext()) {
+                System.out.println("Encrypted field"+cursor3.next().toJson());
+            }
+        } finally {
+            cursor3.close();
+        }*/
         
         /*Print All The Documents of the Collection (modified appropriately)*/
-//       long startTime = System.nanoTime();
-//       /*Option 1
-//       collection.find().forEach((Block <Document>) document2 -> 
-//		{ 
-//			function(document2,myCollection);
-//		}
-//		);*/
-//       
-//       
-//       /* Option 2*/
-//       Iterator<Document> cursor2 = myCollection.find().iterator();
-//       while (cursor2.hasNext()) {
-//           System.out.println(cursor2.next().toJson());
-//       }
-//       long endTime = System.nanoTime();
-//       long duration = (endTime - startTime);
-//       System.out.println("Finding all records with our way ( \" decoding \") "+((float)duration/1000000000)+" secs");
+       /*long startTime = System.nanoTime();
+       //Option 1
+       collection.find().forEach((Block <Document>) document2 -> 
+		{ 
+			function(document2,myCollection);
+		}
+		);
+       
+       
+       // Option 2
+       Iterator<Document> cursor2 = myCollection.find().iterator();
+       while (cursor2.hasNext()) {
+           System.out.println(cursor2.next().toJson());
+       }
+       long endTime = System.nanoTime();
+       long duration = (endTime - startTime);
+       System.out.println("Finding all records with our way ( \" decoding \") "+((float)duration/1000000000)+" secs");*/
         
         Runtime runtime = Runtime.getRuntime();
         // Run the garbage collector
@@ -1189,6 +1172,7 @@ public class App
         mongoClient.close();
     }
     
+    /*Print the Document properly modified [SET SECRET_VALUE on encrypted fields]*/
     static public void function(Document document,AEMongoCollection myCollection) {
     	myCollection.decryptDocument(document,"");
     	System.out.println(document);

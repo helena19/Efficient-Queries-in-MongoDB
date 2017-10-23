@@ -11,17 +11,12 @@ public class AEMongoClient {
 
 	private MongoClient mc;
 	
-
 	public AEMongoClient(ServerAddress serverAddress, List<MongoCredential> asList) {
 		mc = new MongoClient(serverAddress, asList);
 	}
 	
 	public AEMongoCollection getCollection(String databaseName, String collectionName) throws Exception {
 		return new AEMongoCollection(mc.getDatabase(databaseName).getCollection(collectionName), null);
-	}
-	
-	public void setEncryptedFieldInCollection(AEMongoCollection collection, String fieldName, EncryptionType et) {
-		
 	}
 	
 }
