@@ -145,7 +145,7 @@ public class AEMongoCollectionTest {
 	
 	
 	@Test
-	public void shouldStoreRandomPassEncryptedEmbeddedFieldsUsingSHA256Hash() throws Exception {
+	public void shouldStoreRandomPassEncryptedEmbeddedFields() throws Exception {
 		aeMongoCollection.setEncryptedField("name.last", EncryptionType.RANDOM);
 		aeMongoCollection.setEncryptedField("salary", EncryptionType.RANDOM);
 		aeMongoCollection.setEncryptedField("name.surname.middle", EncryptionType.RANDOM);
