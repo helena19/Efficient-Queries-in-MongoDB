@@ -1,8 +1,8 @@
 # BSC Thesis
 
-# In this thesis, we present efficient techniques for inserting data and running queries over
-# a non-relational database, giving the user the option to encrypt certain fields, the ones
-# they want, of the document they insert. 
+In this thesis, we present efficient techniques for inserting data and running queries over
+a non-relational database, giving the user the option to encrypt certain fields, the ones
+they want, of the document they insert. 
 We worked on the Java Driver of a non-relational
 database, more specifically the MongoDB, by modifying some of its existing functions and
 enhancing it with our own functions in order to achieve encryption of the data. With
