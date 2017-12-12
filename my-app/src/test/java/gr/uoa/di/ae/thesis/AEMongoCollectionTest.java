@@ -126,11 +126,9 @@ public class AEMongoCollectionTest {
 		
 		FindIterable<Document> result = collection.find(new Document("name.first", "Michael").append("e-mail", "mike@bulls.com"));
 		assertEquals("mike@bulls.com", result.first().get("e-mail"));
-		System.out.println(result.first());
 		
 		List<Document> result2=aeMongoCollection.find(new Document("name.first", "Michael").append("e-mail", "mike@bulls.com"));
 		assertEquals("mike@bulls.com", result2.get(0).get("e-mail"));
-		System.out.println(result2.get(0));
 		
 		List<Document> result3=aeMongoCollection.find(new Document("e-mail", "mike@bulls.com"));
 		assertEquals("mike@bulls.com", result3.get(0).get("e-mail"));
@@ -147,7 +145,7 @@ public class AEMongoCollectionTest {
 	
 	
 	@Test
-	public void shouldStoreRandomPassEncryptedEmbeddedFieldsUsingSHA256Hash() throws Exception {
+	public void shouldStoreRandomPassEncryptedEmbeddedFields() throws Exception {
 		aeMongoCollection.setEncryptedField("name.last", EncryptionType.RANDOM);
 		aeMongoCollection.setEncryptedField("salary", EncryptionType.RANDOM);
 		aeMongoCollection.setEncryptedField("name.surname.middle", EncryptionType.RANDOM);
@@ -158,11 +156,9 @@ public class AEMongoCollectionTest {
 		
 		FindIterable<Document> result = collection.find(new Document("name.first", "Michael").append("e-mail", "mike@bulls.com"));
 		assertEquals("mike@bulls.com", result.first().get("e-mail"));
-		System.out.println(result.first());
 		
 		List<Document> result2=aeMongoCollection.find2(new Document("name.first", "Michael").append("e-mail", "mike@bulls.com"));
 		assertEquals("mike@bulls.com", result2.get(0).get("e-mail"));
-		System.out.println(result2.get(0));
 		
 		List<Document> result3=aeMongoCollection.find2(new Document("e-mail", "mike@bulls.com"));
 		assertEquals("mike@bulls.com", result3.get(0).get("e-mail"));
@@ -172,7 +168,7 @@ public class AEMongoCollectionTest {
 		
 		List<Document> result4=aeMongoCollection.find2(new Document("name.surname.middle", "Phelps"));
 		assertEquals("mike@bulls.com", result4.get(0).get("e-mail"));
-//		
+		
 		List<Document> result5=aeMongoCollection.find2(new Document("salary",100));
 		assertEquals("SECRET VALUE", result5.get(0).get("salary"));
 	}
@@ -183,7 +179,6 @@ public class AEMongoCollectionTest {
 		Document document = new Document("name", new Document("first", "Michael").append("last", "Jordan")).append("e-mail", "mike@bulls.com");
 		collection.insertOne(document);
 		FindIterable<Document> res = collection.find(new Document("name.first", "Michael").append("e-mail", "mike@bulls.com"));
-		System.out.println("1o document "+res.first());
 		assertEquals("mike@bulls.com", res.first().get("e-mail"));
 	}
 	
