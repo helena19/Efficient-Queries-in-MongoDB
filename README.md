@@ -1,5 +1,6 @@
 # BSC Thesis
-In this thesis, we present efficient techniques for inserting data and running queries over
+
+# In this thesis, we present efficient techniques for inserting data and running queries over
 a non-relational database, giving the user the option to encrypt certain fields, the ones
 they want, of the document they insert. We worked on the Java Driver of a non-relational
 database, more specifically the MongoDB, by modifying some of its existing functions and
@@ -12,11 +13,13 @@ Algorithm) is based on multiple “rounds” of hashing. BCrypt also relies on a
 function, but considered to be a more secure algorithm due to the addition salt, a random
 data used in the production of the encrypted data output. In order to encrypt the fields with
 the two encryption types we mentioned before, we have utilized the libraries DigestUtils
-[3] and BcryptPasswordEncoder[4] from Spring for SHA-256 and BCrypt encryption respectively.
+ and BcryptPasswordEncoder from Spring for SHA-256 and BCrypt encryption respectively.
 The main purpose of this thesis is to study the efficiency of inserting data and
 running queries on a NoSQL database, with the data containing encrypted fields, compared
 to the simple Java Driver that does not support encryption.
-First, the algorithm used in order to efficiently insert documents into the database using
+
+
+# First, the algorithm used in order to efficiently insert documents into the database using
 the SHA-256 encryption on the requested fields is quoted and analyzed. A key element of
 the implementation is that we provide the user with the ability to define the specific fields
 they want to appear on the database as encrypted fields. In addition to this, the algorithm
@@ -25,7 +28,9 @@ are encrypted, and its implementation is analyzed. The algorithm we developed re
 in having an insertion time with encryption and a querying process time (with the data
 being encrypted) that competes with the time the existing Java Driver needs to complete
 those processes.
-Then, the algorithm used in order to support BCrypt encryption is presented and analyzed.
+
+
+# Then, the algorithm used in order to support BCrypt encryption is presented and analyzed.
 Again, the user is able to specify the fields they want to encrypt with the BCrypt algorithm.
 Below, the most efficient algorithm for querying the base for this encryption mode is shown
 and the factors that make it different from the SHA-256 are analyzed.
