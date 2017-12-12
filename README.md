@@ -1,8 +1,9 @@
 # BSC Thesis
 
 # In this thesis, we present efficient techniques for inserting data and running queries over
-a non-relational database, giving the user the option to encrypt certain fields, the ones
-they want, of the document they insert. We worked on the Java Driver of a non-relational
+# a non-relational database, giving the user the option to encrypt certain fields, the ones
+# they want, of the document they insert. 
+We worked on the Java Driver of a non-relational
 database, more specifically the MongoDB, by modifying some of its existing functions and
 enhancing it with our own functions in order to achieve encryption of the data. With
 the changes we made to the Java Driver, our application now supports the insertion of
@@ -19,7 +20,7 @@ running queries on a NoSQL database, with the data containing encrypted fields, 
 to the simple Java Driver that does not support encryption.
 
 
-# First, the algorithm used in order to efficiently insert documents into the database using
+First, the algorithm used in order to efficiently insert documents into the database using
 the SHA-256 encryption on the requested fields is quoted and analyzed. A key element of
 the implementation is that we provide the user with the ability to define the specific fields
 they want to appear on the database as encrypted fields. In addition to this, the algorithm
@@ -30,7 +31,7 @@ being encrypted) that competes with the time the existing Java Driver needs to c
 those processes.
 
 
-# Then, the algorithm used in order to support BCrypt encryption is presented and analyzed.
+Then, the algorithm used in order to support BCrypt encryption is presented and analyzed.
 Again, the user is able to specify the fields they want to encrypt with the BCrypt algorithm.
 Below, the most efficient algorithm for querying the base for this encryption mode is shown
 and the factors that make it different from the SHA-256 are analyzed.
